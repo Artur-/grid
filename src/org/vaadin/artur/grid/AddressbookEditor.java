@@ -1,8 +1,9 @@
-package com.example.grid;
+package org.vaadin.artur.grid;
 
-import com.example.grid.data.Address;
-import com.example.grid.data.Country;
-import com.example.grid.data.Person;
+import org.vaadin.artur.grid.data.Address;
+import org.vaadin.artur.grid.data.Country;
+import org.vaadin.artur.grid.data.Person;
+
 import com.vaadin.data.fieldgroup.DefaultFieldGroupFieldFactory;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;

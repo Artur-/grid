@@ -1,4 +1,4 @@
-package com.example.grid.data;
+package org.vaadin.artur.grid.data;
 
 import java.io.Serializable;
 
