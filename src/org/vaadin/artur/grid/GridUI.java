@@ -1,12 +1,12 @@
 package org.vaadin.artur.grid;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+
+import org.vaadin.artur.grid.servlet.ThemeServlet;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 
 @SuppressWarnings("serial")
@@ -15,7 +15,7 @@ public class GridUI extends UI {
 
 	@WebServlet(value = "/*", asyncSupported = true)
 	@VaadinServletConfiguration(productionMode = false, ui = GridUI.class)
-	public static class Servlet extends VaadinServlet {
+	public static class Servlet extends ThemeServlet {
 	}
 
 	@Override
