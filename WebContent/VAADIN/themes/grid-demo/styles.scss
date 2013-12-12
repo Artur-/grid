@@ -1,0 +1,29 @@
+// Different variations of the theme
+@import "traditional";
+//@import "dark";
+//@import "flat";
+
+
+// Import the main Vaadin theme mixins
+@import "../veneer/veneer";
+
+
+// Build the theme selectors
+.grid-demo {
+  @include v-veneer;
+  
+  .v-button-danger {
+    @include v-veneer-button-variant($background-color: $v-warning-color, $gradient-depth: $v-gradient-depth*1.5);
+  	font-weight: 600;
+  }
+  
+  .v-button-primary {
+    @include v-veneer-button-variant($background-color: $v-primary-color, $gradient-depth: $v-gradient-depth*1.5);
+  	font-weight: 600;
+    padding-left: ceil($v-unit-size/1.6);
+    padding-right: ceil($v-unit-size/1.6);
+  }
+}
+
+@include v-veneer-icons-fontface;
+@include font-source-sans-pro;

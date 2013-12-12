@@ -1,0 +1,20 @@
+@mixin vaadin-veneer-textarea-bundle ($primary-stylename: v-textarea) {
+  
+  .#{$primary-stylename} {
+    @extend %vaadin-veneer-textfield;
+    @include vaadin-primer-textarea;
+  }
+  
+  .#{$primary-stylename}-prompt {
+    @extend %vaadin-veneer-textfield-prompt;
+  }
+  
+  .#{$primary-stylename}[disabled] {
+    @extend %vaadin-veneer-textfield-disabled;
+  }
+  
+  .#{$primary-stylename}:focus {
+    @extend %vaadin-veneer-textfield-focus;
+  }
+  
+}

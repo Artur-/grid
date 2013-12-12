@@ -1,0 +1,76 @@
+// List of theme names in this compilation
+//
+$vaadin-theme-stack: null !default;
+
+
+// This mixin should be included by all inheriting themes
+// So that add-ons can check for different theme names in their styles
+//
+@mixin vaadin-theme-name ($theme-name) {
+  $vaadin-theme-stack: prepend($vaadin-theme-stack, $theme-name);
+}
+
+
+// Checks whether the given theme name is used in this compilation
+//
+@function using-vaadin-theme ($theme-name) {
+  @return contains($vaadin-theme-stack, $theme-name);
+}
+
+
+
+
+// List of components to include in the theme compilation
+$vaadin-components-included: 
+		absolutelayout,
+		accordion,
+		button,
+		calendar,
+		checkbox,
+		colorpicker,
+		combobox,
+		csslayout,
+		customcomponent,
+		customlayout,
+		datefield,
+		dragwrapper,
+		form,
+		formlayout,
+		grid,
+		gridlayout,
+		label,
+		link,
+		loginform,
+		menubar,
+		nativebutton,
+		nativeselect,
+		optiongroup,
+		orderedlayout,
+		panel,
+		popupview,
+		progressindicator,
+		slider,
+		splitpanel,
+		table,
+		tabsheet,
+		textfield,
+		textarea,
+		tree,
+		treetable,
+		twincolselect,
+		upload,
+		window !default;
+
+
+// Checks if a given component is included in the compilation
+//
+@function include-vaadin-component ($component-name, $components-included: $vaadin-components-included) {
+  @return contains($components-included, $component-name);
+}
+
+
+
+// This is needed to overcome issues with line-boxes (i.e. block elements 
+// with inline elements as children, whose height is less than the parent's line-height)
+// See: http://stackoverflow.com/questions/3003051/why-does-the-html5-doctype-mess-with-my-padding
+$v-line-height: 1.5 !default;

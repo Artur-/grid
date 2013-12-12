@@ -1,0 +1,44 @@
+@mixin vaadin-veneer-label-bundle {
+
+  @include vaadin-primer-label-bundle;
+  
+  /*
+  .v-label {
+  	font-weight: 300;
+  }
+  
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+   h1,
+   h2,
+   h3,
+   h4 {
+    line-height: 1.1;
+    color: tune-header-color($vaadin-bg-color);
+    font-weight: 400;
+  }
+
+  .h1,
+  h1 {
+    font-size: 2.8em;
+    letter-spacing: -.04em;
+  }
+  
+  .h2,
+  h2 {
+    font-size: 2em;
+    letter-spacing: -.03em;
+  }
+  
+  .h3,
+  h3 {
+    font-size: 1.6em;
+  }
+  
+  .large {
+    font-size: 1.2em;
+  }
+  */
+}

@@ -1,0 +1,158 @@
+@import "color";
+@import "anim";
+
+// Align element vertically inside
+@mixin vertical-align-guide ($to-align: (), $align: middle, $pseudo-element: after) {
+  &:#{$pseudo-element} {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 100%;
+    vertical-align: middle;
+  }
+  
+  @if length($to-align) > 0 {
+    @each $class in $to-align {
+      & > .#{$class} {
+        vertical-align: $align;
+      }
+    }
+  }
+}
+
+
+
+@function text-color-active ($bg-color) {
+  @return text-color(darken($bg-color, 5%));
+}
+
+/*
+@function text-color-disabled ($bg-color) {
+  @return if(color-luminance($bg-color) > 170, adjust-color($bg-color, $lightness: -20%, $saturation: -6%), adjust-color($bg-color, $lightness: 20%, $saturation: -6%))
+}
+
+
+@function text-color-light ($bg-color) {
+  @return if(color-luminance($bg-color) > 170, adjust-color($bg-color, $lightness: -30%, $saturation: -3%), adjust-color($bg-color, $lightness: 30%, $saturation: -3%))
+}
+*/
+
+
+
+@function color-variant ($color, $amount) {
+  @if color-luminance($color) > 170 {
+    @return adjust_color($color, $lightness: -$amount);
+  } @else {
+    @return adjust_color($color, $lightness: $amount);
+  }
+}
+
+
+
+
+
+
+@function v-veneer-emboss-text-shadow ($text-color: null, $bg-color: $v-widget-color, $emboss-depth: $v-emboss-depth) {
+  
+  @if $text-color == null {
+    $text-color: text-color($bg-color);
+  }
+  
+  @if color-luminance($text-color) > 170 {
+  	@return $v-emboss-text-shadow-alt rgba(0,0,0, $emboss-depth/100%);
+  } @else {
+    @return $v-emboss-text-shadow rgba(255,255,255, $emboss-depth/100%);
+  }
+  
+}
+
+
+@function v-veneer-emboss-inner-box-shadow ($bg-color: $v-widget-color, $emboss-depth: $v-emboss-depth) {
+  $_emboss-size: 0; //($emboss-depth/400%) + em;
+  
+  $start: $bg-color;
+  $end: $bg-color;
+  
+  @if $v-gradient-style and $v-gradient-depth > 0 {
+    $amount: $v-gradient-depth;
+  	@if color-luminance($bg-color) > 200 {
+      $amount: min(100%, $amount * 2);
+    }
+    $start: color-overlay(#fff, $bg-color, $amount);
+    $end: color-overlay(#000, $bg-color, $amount);
+  }
+  
+  $_top-color: color-screen(#fff, $start, $emboss-depth);
+  $_bottom-color: color-multiply(#000, $end, $emboss-depth/2.5);
+  
+  @return (inset 0 -1px $_emboss-size $_bottom-color, inset 0 1px $_emboss-size $_top-color);
+
+}
+
+
+
+@function v-veneer-emboss-outer-box-shadow ($bg-color: $v-widget-color, $emboss-depth: $v-emboss-depth, $context-bg-color: $v-app-background-color) {
+  @if $emboss-depth <= 0 {
+    @return none;
+  }
+  $_outer-emboss-depth: if(color-luminance($bg-color) > $v-background-luminance-threshold*2, 1-$emboss-depth/100%, 1-$emboss-depth/100%/2);
+  $_outer-emboss-direction: if(color-luminance($context-bg-color) > $v-background-luminance-threshold, 1px, -1px);
+  $_outer-emboss-color: if(color-luminance($context-bg-color) > $v-background-luminance-threshold, #fff, #000);
+  $_veneer-emboss-outer-box-shadow: 0 $_outer-emboss-direction 0 transparentize($_outer-emboss-color, min(1, $_outer-emboss-depth));
+  @return $_veneer-emboss-outer-box-shadow;
+}
+
+
+@function v-veneer-emboss-box-shadow (
+    $bg-color: $v-widget-color, 
+    $context-bg-color: $v-app-background-color,
+    $emboss-depth: $v-emboss-depth,
+    $defaults: false
+  ) {
+  $_veneer-emboss-inner-box-shadow: v-veneer-emboss-inner-box-shadow($bg-color: $bg-color, $emboss-depth: $emboss-depth);
+  $_veneer-emboss-outer-box-shadow: v-veneer-emboss-outer-box-shadow($bg-color: $bg-color, $context-bg-color: $context-bg-color, $emboss-depth: $emboss-depth);
+
+  @if $defaults {
+    // Set the public defaults
+    $v-emboss-inner-box-shadow: $_veneer-emboss-inner-box-shadow !default;
+    $v-emboss-outer-box-shadow: $_veneer-emboss-outer-box-shadow !default;
+    
+    $_veneer-emboss-box-shadow: none;
+    @if $v-emboss-inner-box-shadow != none and $v-emboss-outer-box-shadow == none {
+      $_veneer-emboss-box-shadow: $v-emboss-inner-box-shadow;
+    } @else if $v-emboss-inner-box-shadow == none and $v-emboss-outer-box-shadow != none {
+      $_veneer-emboss-box-shadow: $v-emboss-outer-box-shadow;
+    } @else if $v-emboss-inner-box-shadow != none and $v-emboss-outer-box-shadow != none {
+      $_veneer-emboss-box-shadow: $v-emboss-inner-box-shadow, $v-emboss-outer-box-shadow;
+    }
+  }
+  @return $_veneer-emboss-inner-box-shadow, $_veneer-emboss-outer-box-shadow; 
+}
+
+
+
+
+
+
+
+@mixin v-veneer-gradient($color, $style: $v-gradient-style, $depth: $v-gradient-depth, $avoid-extend: false) {
+  @if $color != null {
+    @if $depth <= 0 {
+      background-color: $color;
+    } @else {
+      @if $avoid-extend == false and contains($v-veneer-gradient-colors, $color) and $depth == $v-gradient-depth {
+        @extend %v-veneer-linear-gradient-#{$color}-#{floor($depth/1%)};
+      } @else {
+        @if color-luminance($color) > 200 {
+          $depth: min(100%, $depth * 2);
+        }
+        $start: color-overlay(#fff, $color, $depth);
+        $end: color-overlay(#000, $color, $depth);
+        
+        // TODO handle other styles than "linear"
+        @include linear-gradient(to top, $end, $start);
+      }
+    }
+  }
+}
+

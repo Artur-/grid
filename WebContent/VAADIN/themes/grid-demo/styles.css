@@ -1,0 +1,1517 @@
+.v-debug-console {
+  background: #fff;
+  opacity: .9;
+  border: 1px solid #000;
+  font-family: sans-serif; }
+
+.v-debug-console-caption {
+  background: #000;
+  border-bottom: 1px solid grey;
+  color: white;
+  font-weight: bold; }
+
+.v-debug-console-content {
+  font-size: x-small;
+  overflow: auto;
+  white-space: pre; }
+
+.v-debug-console-content input {
+  font-size: xx-small; }
+
+/* Debug style */
+.v-app .invalidlayout,
+.v-app .invalidlayout * {
+  background: #f99 !important; }
+
+/* NEW debug window */
+@font-face {
+  font-family: 'vdebugfont';
+  src: url("../debug/fonts/font.eot");
+  src: url("../debug/fonts/font.eot?#iefix") format("embedded-opentype"), url("../debug/fonts/font.woff") format("woff"), url("../debug/fonts/font.ttf") format("truetype"), url("../debug/fonts/font.svg#fontawesome") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+.v-debugwindow [data-icon]:before,
+.v-debugwindow-menu [data-icon]:before {
+  font-family: 'vdebugfont';
+  content: attr(data-icon);
+  speak: none;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  vertical-align: text-bottom; }
+
+.v-debugwindow {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  opacity: 0.8;
+  -ms-filter: alpha(opacity=80);
+  color: #666666;
+  font-size: 13px; }
+
+.v-debugwindow:hover {
+  opacity: 1;
+  -ms-filter: none; }
+
+.v-debugwindow * {
+  font-size: inherit !important; }
+
+.v-debugwindow-size0,
+.v-debugwindow-menu .v-debugwindow-button-size0 {
+  font-size: 10px; }
+
+.v-debugwindow-size1,
+.v-debugwindow-menu .v-debugwindow-button-size1 {
+  font-size: 13px; }
+
+.v-debugwindow-size2,
+.v-debugwindow-menu .v-debugwindow-button-size2 {
+  font-size: 16px; }
+
+.v-debugwindow-head {
+  text-align: right;
+  cursor: move;
+  bakcground-color: transparent; }
+
+.v-debugwindow-tabs {
+  display: inline-block;
+  background-color: white; }
+
+.v-debugwindow-tab,
+.v-debugwindow-controls > * {
+  width: 2em;
+  border: none;
+  margin: 0;
+  line-height: 1.5em;
+  background-color: white;
+  color: #666666; }
+
+.v-debugwindow-tab {
+  position: relative;
+  top: 1px;
+  border-width: 1px 0 1px 1px;
+  border-style: solid;
+  border-color: #666666;
+  border-radius: 2px 2px 0 0; }
+
+.v-debugwindow-tab-selected {
+  color: #666666;
+  background-color: white;
+  border-bottom: 1px solid #fff; }
+
+.v-debugwindow-controls {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  background-color: white;
+  border: 1px solid #666666;
+  border-radius: 2px 2px 0 0; }
+
+.v-debugwindow-section-head {
+  text-align: left;
+  background-color: white;
+  border: 1px solid #666666;
+  border-bottom: 1px solid #999999;
+  box-shadow: 0px 0px 7px 0 rgba(55, 55, 55, 0.6);
+  min-height: 1.5em; }
+
+.v-debugwindow-button {
+  border: none;
+  background-color: transparent;
+  color: #666666; }
+
+.v-debugwindow-button:hover {
+  color: black;
+  text-decoration: underline; }
+
+.v-debugwindow-button-active {
+  color: #666666;
+  box-shadow: 1px 1px 3px 0 inset; }
+
+.v-debugwindow-content {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 7px 0 rgba(55, 55, 55, 0.6);
+  background-color: white;
+  border: 1px solid #666666;
+  border-top: none;
+  font-family: monospace; }
+
+.v-debugwindow-menu {
+  background-color: white;
+  padding: 4px;
+  border: 1px solid #999999;
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0px 0px 7px 0 rgba(55, 55, 55, 0.6); }
+
+.v-debugwindow-menu-content {
+  min-width: 100px; }
+
+.v-debugwindow-menu-content .v-debugwindow-button {
+  line-height: 22px; }
+
+.v-debugwindow-menu-content > div > .v-debugwindow-button {
+  width: 33%; }
+
+/* LOG */
+.v-debugwindow-reset {
+  color: #fff;
+  background-color: #4C92ED;
+  padding: 4px; }
+
+.v-debugwindow-row {
+  display: table-row; }
+
+.v-debugwindow-row:nth-child(odd) {
+  background-color: rgba(0, 61, 255, 0.11); }
+
+.v-debugwindow-row.ERROR {
+  color: #550000;
+  background-color: #FFC5C5; }
+
+.v-debugwindow-row.WARNING {
+  background-color: #FFFF99; }
+
+.v-debugwindow-row > span {
+  display: table-cell;
+  padding: 4px; }
+
+.v-debugwindow-time {
+  text-align: right;
+  color: #999; }
+
+.v-debugwindow-message {
+  white-space: nowrap;
+  width: 100%; }
+
+.v-debugwindow-message:hover {
+  white-space: normal;
+  word-wrap: break-word; }
+
+.v-debugwindow-message em {
+  background-color: #C4E6F8; }
+
+/* HIERARCHY */
+.v-debugwindow-row > span.caption {
+  color: #999;
+  text-align: right;
+  white-space: nowrap; }
+
+.v-debugwindow-row > span.value {
+  width: 100%; }
+
+.v-debugwindow {
+  position: fixed !important; }
+
+.grid-demo .v-disabled, .grid-demo .v-filterselect.v-disabled > .v-filterselect-input, .grid-demo .v-textfield[disabled], .grid-demo .v-filterselect-suggestpopup .gwt-MenuItem, .grid-demo .v-datefield-calendarpanel-day,
+.grid-demo .v-button {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.v-generated-body {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: 0; }
+
+.v-app {
+  height: 100%; }
+
+.v-ui {
+  position: relative; }
+
+.v-ui.v-ui-embedded {
+  margin-top: -1px;
+  border-top: 1px solid transparent; }
+
+.v-ui:focus {
+  outline: none; }
+
+.v-overlay-container {
+  width: 0;
+  height: 0; }
+
+input::-ms-clear {
+  display: none; }
+
+.v-drag-element {
+  z-index: 60000;
+  /* override any other position properties */
+  position: absolute !important;
+  cursor: default; }
+
+.v-clip {
+  overflow: hidden; }
+
+.v-scrollable {
+  overflow: auto;
+  line-height: 0; }
+
+.v-ios.v-webkit .v-scrollable {
+  -webkit-overflow-scrolling: touch; }
+
+.v-ios5.v-webkit .v-scrollable {
+  -webkit-overflow-scrolling: none; }
+
+.v-assistive-device-only {
+  position: absolute;
+  top: -2000px;
+  left: -2000px;
+  width: 10px;
+  overflow: hidden; }
+
+.v-icon,
+.v-errorindicator,
+.v-required-field-indicator,
+.v-caption,
+.v-captiontext {
+  display: inline-block;
+  line-height: 1.5; }
+
+.v-tooltip {
+  pointer-events: none; }
+
+.v-select-twincol .v-button, .grid-demo .v-filterselect-input, .grid-demo .v-filterselect-button, .grid-demo .v-datefield-textfield, .grid-demo .v-datefield-button,
+.v-widget {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+  text-align: left;
+  white-space: normal;
+  line-height: 1.5;
+  vertical-align: middle; }
+
+.v-absolutelayout-wrapper {
+  position: absolute; }
+
+.v-absolutelayout-margin,
+.v-absolutelayout-canvas {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.v-absolutelayout.v-has-height > div,
+.v-absolutelayout.v-has-height .v-absolutelayout-margin {
+  height: 100%; }
+
+.v-absolutelayout.v-has-height > div,
+.v-absolutelayout.v-has-width .v-absolutelayout-margin {
+  width: 100%; }
+
+.v-colorpicker-gradient-clicklayer {
+  opacity: 0 ;
+  -ms-filter: alpha(opacity=0%) ; }
+
+.rgb-gradient .v-colorpicker-gradient-background {
+  background: url(../core/components/colorpicker/img/gradient2.png); }
+
+.hsv-gradient .v-colorpicker-gradient-foreground {
+  background: url(../core/components/colorpicker/img/gradient.png); }
+
+.v-colorpicker-gradient-lowerbox {
+  border-right: 1px solid rgba(122, 122, 122, 0.5);
+  border-top: 1px solid rgba(122, 122, 122, 0.5); }
+
+.v-colorpicker-gradient-higherbox {
+  border-left: 1px solid rgba(122, 122, 122, 0.5);
+  border-bottom: 1px solid rgba(122, 122, 122, 0.5); }
+
+.v-colorpicker-popup .v-slider.v-slider-red:before {
+  background-color: red; }
+
+.v-colorpicker-popup .v-slider.v-slider-green:before {
+  background-color: green; }
+
+.v-colorpicker-popup .v-slider.v-slider-blue:before {
+  background-color: blue; }
+
+.v-colorpicker-popup .v-slider.hue-slider:before {
+  background: url(../core/components/colorpicker/img/slider_hue_bg.png); }
+
+.v-colorpicker-popup .v-textfield-dark {
+  color: #fff; }
+
+.v-colorpicker-popup .v-textfield-light {
+  color: #000; }
+
+.v-colorpicker-grid {
+  height: 319px; }
+
+.v-colorpicker-popup .colorselect td {
+  line-height: 15px; }
+
+.v-csslayout {
+  display: block; }
+
+.v-form fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  height: 100%; }
+
+.v-form-content {
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.v-escalator {
+  position: relative;
+  background-color: white; }
+
+.v-escalator-scroller {
+  position: absolute;
+  overflow: auto;
+  z-index: 20; }
+
+.v-escalator-scroller-horizontal {
+  left: 0;
+  /* Left position adjusted to align with frozen columns */
+  right: 0;
+  bottom: 0;
+  overflow-y: hidden;
+  -ms-overflow-y: hidden; }
+
+.v-escalator-scroller-vertical {
+  right: 0;
+  top: 0;
+  /* this will be overridden by code, but it's a good default behavior */
+  bottom: 0;
+  /* this will be overridden by code, but it's a good default behavior */
+  overflow-x: hidden;
+  -ms-overflow-x: hidden; }
+
+.v-escalator-tablewrapper {
+  position: absolute;
+  overflow: hidden; }
+
+.v-escalator-tablewrapper > table {
+  border-spacing: 0;
+  table-layout: fixed;
+  width: inherit;
+  /* a decent default fallback */ }
+
+.v-escalator-header,
+.v-escalator-body,
+.v-escalator-footer {
+  position: absolute;
+  left: 0;
+  width: inherit;
+  z-index: 10; }
+
+.v-escalator-header {
+  top: 0; }
+
+.v-escalator-footer {
+  bottom: 0; }
+
+.v-escalator-body {
+  z-index: 0;
+  top: 0; }
+  .v-escalator-body .v-escalator-row {
+    position: absolute;
+    top: 0;
+    left: 0; }
+
+.v-escalator-row {
+  display: block; }
+  .v-ie8 .v-escalator-row {
+    /* IE8 doesn't let table rows be longer than body only with display block. Moar hax. */
+    float: left;
+    clear: left;
+    /* 
+     * The inline style of margin-top from the <tbody> to offset the header's dimension is, 
+     * for some strange reason, inherited into each contained <tr>. 
+     * We need to cancel it: 
+     */
+    margin-top: 0; }
+  .v-escalator-row > td, .v-escalator-row > th {
+    /* IE8 likes the bgcolor here instead of on the row */
+    background-color: white; }
+
+.v-escalator-row {
+  width: inherit; }
+
+.v-escalator-cell {
+  display: block;
+  float: left;
+  border: 1px solid #aaaaaa;
+  padding: 2px;
+  white-space: nowrap;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.v-escalator-cell.frozen {
+  position: relative;
+  z-index: 0; }
+
+.v-gridlayout {
+  position: relative;
+  line-height: 0; }
+
+.v-gridlayout-slot {
+  position: absolute; }
+
+.v-gridlayout-spacing-on {
+  overflow: hidden; }
+
+.v-gridlayout-spacing,
+.v-gridlayout-spacing-off {
+  padding-left: 0;
+  padding-top: 0; }
+
+.v-gridlayout-spacing-off {
+  overflow: hidden; }
+
+.v-label-undef-w {
+  white-space: nowrap; }
+
+.v-nativebutton {
+  -webkit-touch-callout: none; }
+
+.v-verticallayout,
+.v-horizontallayout {
+  line-height: 0; }
+
+div.v-layout.v-horizontal.v-widget {
+  white-space: nowrap; }
+
+.v-layout.v-vertical > .v-expand,
+.v-layout.v-horizontal > .v-expand {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+
+.v-slot,
+.v-spacing {
+  display: inline-block;
+  white-space: normal;
+  vertical-align: top; }
+
+.v-vertical > .v-slot:after {
+  display: inline-block;
+  clear: both;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  line-height: 0; }
+
+.v-vertical > .v-slot,
+.v-vertical > .v-expand > .v-slot {
+  display: block;
+  clear: both; }
+
+.v-horizontal > .v-slot,
+.v-horizontal > .v-expand > .v-slot {
+  height: 100%; }
+
+.v-vertical > .v-spacing,
+.v-vertical > .v-expand > .v-spacing {
+  width: 0;
+  display: block;
+  clear: both; }
+
+.v-horizontal > .v-spacing,
+.v-horizontal > .v-expand > .v-spacing {
+  height: 0; }
+
+.v-align-middle:before,
+.v-align-bottom:before,
+.v-expand > .v-align-middle:before,
+.v-expand > .v-align-bottom:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  width: 0;
+  overflow: hidden; }
+
+.v-align-middle,
+.v-align-bottom {
+  white-space: nowrap; }
+
+.v-align-middle > .v-widget,
+.v-align-bottom > .v-widget {
+  display: inline-block; }
+
+.v-align-middle,
+.v-align-middle > .v-widget {
+  vertical-align: middle; }
+
+.v-align-bottom,
+.v-align-bottom > .v-widget {
+  vertical-align: bottom; }
+
+.v-align-center {
+  text-align: center; }
+
+.v-align-center > .v-widget {
+  margin-left: auto;
+  margin-right: auto; }
+
+.v-align-right {
+  text-align: right; }
+
+.v-align-right > .v-widget {
+  margin-left: auto; }
+
+.v-has-caption,
+.v-has-caption > .v-caption {
+  display: inline-block; }
+
+.v-caption-on-left,
+.v-caption-on-right {
+  white-space: nowrap; }
+
+.v-caption-on-top > .v-caption,
+.v-caption-on-bottom > .v-caption {
+  display: block; }
+
+.v-caption-on-left > .v-caption {
+  padding-right: .5em; }
+
+.v-caption-on-right > .v-caption {
+  vertical-align: top; }
+
+.v-caption-on-left > .v-widget,
+.v-caption-on-right > .v-widget {
+  display: inline-block;
+  vertical-align: middle; }
+
+.v-has-caption.v-has-width > .v-widget {
+  width: 100% !important; }
+
+.v-has-caption.v-has-height > .v-widget {
+  height: 100% !important; }
+
+.v-panel-content {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%; }
+
+.v-splitpanel-hsplitter div {
+  position: absolute;
+  top: 0;
+  bottom: 0; }
+
+.v-tabsheet-tabcontainer {
+  white-space: nowrap; }
+
+.v-tabsheet-tabs {
+  display: inline-block; }
+  .v-tabsheet-tabs > tbody {
+    display: block; }
+  .v-tabsheet-tabs tr {
+    display: block; }
+
+.v-tabsheet-tabitemcell,
+.v-tabsheet-spacertd {
+  display: inline-block;
+  padding: 0; }
+
+.v-tabsheet-tabitem > .v-caption {
+  width: auto !important; }
+
+.v-tabsheet-hidetabs > .v-tabsheet-tabcontainer,
+.v-tabsheet-spacertd,
+.v-tabsheet-deco,
+.v-disabled .v-tabsheet-scroller,
+.v-tabsheet .v-disabled .v-tabsheet-caption-close {
+  display: none; }
+
+.v-tabsheet-caption-close {
+  display: inline-block; }
+
+.v-tabsheet-content {
+  position: relative; }
+
+.v-select-twincol {
+  width: auto !important; }
+
+.v-select-twincol-buttons {
+  white-space: nowrap;
+  display: inline-block;
+  width: auto !important;
+  vertical-align: top; }
+
+@-webkit-keyframes v-veneer-fade-in {
+  0% {
+    opacity: 0; } }
+@-moz-keyframes v-veneer-fade-in {
+  0% {
+    opacity: 0; } }
+@keyframes v-veneer-fade-in {
+  0% {
+    opacity: 0; } }
+@-webkit-keyframes v-veneer-roll-down {
+  0% {
+    -webkit-transform: translateY(-100%); } }
+@-moz-keyframes v-veneer-roll-down {
+  0% {
+    -moz-transform: translateY(-100%); } }
+@keyframes v-veneer-roll-down {
+  0% {
+    transform: translateY(-100%); } }
+/*
+@function text-color-disabled ($bg-color) {
+  @return if(color-luminance($bg-color) > 170, adjust-color($bg-color, $lightness: -20%, $saturation: -6%), adjust-color($bg-color, $lightness: 20%, $saturation: -6%))
+}
+
+
+@function text-color-light ($bg-color) {
+  @return if(color-luminance($bg-color) > 170, adjust-color($bg-color, $lightness: -30%, $saturation: -3%), adjust-color($bg-color, $lightness: 30%, $saturation: -3%))
+}
+*/
+@-webkit-keyframes v-veneer-fade-in {
+  0% {
+    opacity: 0; } }
+@-moz-keyframes v-veneer-fade-in {
+  0% {
+    opacity: 0; } }
+@keyframes v-veneer-fade-in {
+  0% {
+    opacity: 0; } }
+@-webkit-keyframes v-veneer-roll-down {
+  0% {
+    -webkit-transform: translateY(-100%); } }
+@-moz-keyframes v-veneer-roll-down {
+  0% {
+    -moz-transform: translateY(-100%); } }
+@keyframes v-veneer-roll-down {
+  0% {
+    transform: translateY(-100%); } }
+/*
+@function text-color-disabled ($bg-color) {
+  @return if(color-luminance($bg-color) > 170, adjust-color($bg-color, $lightness: -20%, $saturation: -6%), adjust-color($bg-color, $lightness: 20%, $saturation: -6%))
+}
+
+
+@function text-color-light ($bg-color) {
+  @return if(color-luminance($bg-color) > 170, adjust-color($bg-color, $lightness: -30%, $saturation: -3%), adjust-color($bg-color, $lightness: 30%, $saturation: -3%))
+}
+*/
+@-webkit-keyframes v-rotate-360 {
+  to {
+    -webkit-transform: rotate(360deg); } }
+@-moz-keyframes v-rotate-360 {
+  to {
+    -moz-transform: rotate(360deg); } }
+@-o-keyframes v-rotate-360 {
+  to {
+    -o-transform: rotate(360deg); } }
+@keyframes v-rotate-360 {
+  to {
+    transform: rotate(360deg); } }
+@-webkit-keyframes v-progress-start {
+  0% {
+    width: 0%; }
+
+  100% {
+    width: 50%; } }
+@-moz-keyframes v-progress-start {
+  0% {
+    width: 0%; }
+
+  100% {
+    width: 50%; } }
+@keyframes v-progress-start {
+  0% {
+    width: 0%; }
+
+  100% {
+    width: 50%; } }
+@-webkit-keyframes v-progress-delay {
+  0% {
+    width: 50%; }
+
+  100% {
+    width: 90%; } }
+@-moz-keyframes v-progress-delay {
+  0% {
+    width: 50%; }
+
+  100% {
+    width: 90%; } }
+@keyframes v-progress-delay {
+  0% {
+    width: 50%; }
+
+  100% {
+    width: 90%; } }
+@-webkit-keyframes v-progress-wait {
+  0% {
+    width: 90%; }
+
+  100% {
+    width: 96%; } }
+@-moz-keyframes v-progress-wait {
+  0% {
+    width: 90%; }
+
+  100% {
+    width: 96%; } }
+@keyframes v-progress-wait {
+  0% {
+    width: 90%; }
+
+  100% {
+    width: 96%; } }
+@-webkit-keyframes v-progress-wait-pulse {
+  0% {
+    opacity: 1; }
+
+  50% {
+    opacity: .3; }
+
+  100% {
+    opacity: 1; } }
+@-moz-keyframes v-progress-wait-pulse {
+  0% {
+    opacity: 1; }
+
+  50% {
+    opacity: .3; }
+
+  100% {
+    opacity: 1; } }
+@keyframes v-progress-wait-pulse {
+  0% {
+    opacity: 1; }
+
+  50% {
+    opacity: .3; }
+
+  100% {
+    opacity: 1; } }
+.grid-demo .v-filterselect-suggestpopup .gwt-MenuItem-selected, .grid-demo .v-datefield-calendarpanel-day.v-datefield-calendarpanel-day-selected {
+  background-color: #1190ed;
+  background-image: -webkit-linear-gradient(bottom, #1190ed, #17adf2);
+  background-image: linear-gradient(to top,#1190ed, #17adf2); }
+
+.grid-demo .v-datefield-calendarpanel-day,
+.grid-demo .v-button, .grid-demo .v-datefield-calendarpanel-header {
+  background-color: #e7e7e7;
+  background-image: -webkit-linear-gradient(bottom, #e7e7e7, #f2f2f2);
+  background-image: linear-gradient(to top,#e7e7e7, #f2f2f2); }
+
+.grid-demo .v-filterselect-suggestpopup .gwt-MenuItem-selected, .grid-demo .v-datefield-calendarpanel-day.v-datefield-calendarpanel-day-selected {
+  background-color: #1190ed;
+  background-image: -webkit-linear-gradient(bottom, #1190ed, #17adf2);
+  background-image: linear-gradient(to top,#1190ed, #17adf2); }
+
+@-webkit-keyframes v-veneer-fade-in {
+  0% {
+    opacity: 0; } }
+@-moz-keyframes v-veneer-fade-in {
+  0% {
+    opacity: 0; } }
+@keyframes v-veneer-fade-in {
+  0% {
+    opacity: 0; } }
+@-webkit-keyframes v-veneer-roll-down {
+  0% {
+    -webkit-transform: translateY(-100%); } }
+@-moz-keyframes v-veneer-roll-down {
+  0% {
+    -moz-transform: translateY(-100%); } }
+@keyframes v-veneer-roll-down {
+  0% {
+    transform: translateY(-100%); } }
+/*
+@function text-color-disabled ($bg-color) {
+  @return if(color-luminance($bg-color) > 170, adjust-color($bg-color, $lightness: -20%, $saturation: -6%), adjust-color($bg-color, $lightness: 20%, $saturation: -6%))
+}
+
+
+@function text-color-light ($bg-color) {
+  @return if(color-luminance($bg-color) > 170, adjust-color($bg-color, $lightness: -30%, $saturation: -3%), adjust-color($bg-color, $lightness: 30%, $saturation: -3%))
+}
+*/
+.grid-demo .v-datefield-calendarpanel-day:focus,
+.grid-demo .v-button:focus, .grid-demo .v-datefield-calendarpanel-day.v-datefield-calendarpanel-day-focused {
+  outline: none;
+  border-color: #149ff0;
+  box-shadow: inset 0 -1px 0 #dddddd, inset 0 1px 0 #f3f3f3, 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 3px #149ff0; }
+  .v-ie8 .grid-demo .v-datefield-calendarpanel-day:focus, .grid-demo .v-ie8 .v-datefield-calendarpanel-day:focus,
+  .v-ie8 .grid-demo .v-button:focus,
+  .grid-demo .v-ie8 .v-button:focus, .v-ie8 .grid-demo .v-datefield-calendarpanel-day.v-datefield-calendarpanel-day-focused, .grid-demo .v-ie8 .v-datefield-calendarpanel-day.v-datefield-calendarpanel-day-focused {
+    outline: 1px solid #149ff0; }
+
+.grid-demo .v-disabled {
+  cursor: default;
+  opacity: 0.3 ;
+  -ms-filter: alpha(opacity=30%) ; }
+  .grid-demo .v-disabled .v-disabled {
+    opacity: 1 ;
+    -ms-filter: none ; }
+  .grid-demo .v-disabled:focus {
+    outline: none; }
+
+.grid-demo .v-filterselect-suggestpopup .gwt-MenuItem-selected:active, .grid-demo .v-datefield-calendarpanel-day:active, .grid-demo .v-pressed.v-datefield-calendarpanel-day,
+.grid-demo .v-button:active,
+.grid-demo .v-button.v-pressed, .grid-demo .v-button-danger:active, .grid-demo .v-button-danger.v-pressed, .grid-demo .v-button-primary:active, .grid-demo .v-button-primary.v-pressed {
+  position: relative;
+  outline: none; }
+  .grid-demo .v-filterselect-suggestpopup .gwt-MenuItem-selected:active:after, .grid-demo .v-datefield-calendarpanel-day:active:after, .grid-demo .v-pressed.v-datefield-calendarpanel-day:after,
+  .grid-demo .v-button:active:after,
+  .grid-demo .v-button.v-pressed:after, .grid-demo .v-button-danger:active:after, .grid-demo .v-button-danger.v-pressed:after, .grid-demo .v-button-primary:active:after, .grid-demo .v-button-primary.v-pressed:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.1 ;
+    -ms-filter: alpha(opacity=10%) ;
+    border-radius: inherit; }
+
+.grid-demo .v-filterselect.v-disabled > .v-filterselect-input, .grid-demo .v-textfield[disabled], .grid-demo .v-disabled.v-datefield-calendarpanel-day,
+.grid-demo .v-button.v-disabled {
+  background: !important;
+  border-color: !important;
+  color: !important; }
+
+.grid-demo .v-filterselect-input, .grid-demo .v-textfield {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  font: inherit;
+  background-color: white;
+  color: inherit;
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid #a5a5a5;
+  margin: 0;
+  border-radius: 4px;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.03), 0 1px 0 rgba(255, 255, 255, 0.58431);
+  -webkit-transition: border-color 100ms linear, box-shadow 100ms linear;
+  -moz-transition: border-color 100ms linear, box-shadow 100ms linear;
+  transition: border-color 100ms linear, box-shadow 100ms linear; }
+
+.grid-demo .v-filterselect-input:focus, .grid-demo .v-textfield:focus {
+  outline: none;
+  border-color: #149ff0;
+  box-shadow: 0 0 3px #149ff0, inset 0 1px rgba(0, 0, 0, 0.03), 0 1px 0 rgba(255, 255, 255, 0.58431); }
+
+.grid-demo .v-filterselect-prompt > .v-filterselect-input, .grid-demo .v-datefield-prompt .v-datefield-textfield, .grid-demo .v-textfield-prompt {
+  color: #aeaeae; }
+
+.grid-demo {
+  /*.v-loading-indicator {
+    top: $_spinner-size;
+    left: 50%;
+    margin-left: $_spinner-size/-2;
+    z-index: 30000;
+  }
+  
+  .v-loading-indicator,
+  .v-app-loading:before {
+    @include v-veneer-spinner($size: $_spinner-size);
+  }
+  
+  .v-loading-indicator-delay {
+    border-width: ceil($_spinner-size/5);
+  }
+  
+  .v-loading-indicator-wait {
+  	border-color: transparentize($v-secondary-color, .8);
+    border-top-color: transparentize($v-secondary-color, .15);
+    border-right-color: transparentize($v-secondary-color, .15);
+    border-width: ceil($_spinner-size/4);
+  }
+  
+  .v-app-loading:before {
+      content: "";
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      margin-top: $_spinner-size/-2;
+      margin-left: $_spinner-size/-2;
+    }
+  }*/ }
+  .grid-demo, .grid-demo.v-app-loading {
+    font: normal 14px/1.5 "Source Sans Pro", sans-serif;
+    color: #5e5e5e;
+    background-color: #f7f7f7; }
+  .grid-demo .v-loading-indicator {
+    position: fixed !important;
+    z-index: 99999;
+    left: 0;
+    right: auto;
+    top: 0;
+    width: 50%;
+    opacity: 1;
+    height: 5px;
+    background: #545454;
+    pointer-events: none;
+    -webkit-transition: opacity ease-in-out 300ms;
+    -moz-transition: opacity ease-in-out 300ms;
+    transition: opacity ease-in-out 300ms;
+    -webkit-animation: v-progress-start 1200ms;
+    -moz-animation: v-progress-start 1200ms;
+    animation: v-progress-start 1200ms;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    animation-fill-mode: forwards; }
+    .grid-demo .v-loading-indicator[style*="none"] {
+      display: block !important;
+      width: 100%;
+      opacity: 0;
+      -webkit-transition-property: all;
+      -moz-transition-property: all;
+      transition-property: all;
+      -webkit-animation: none;
+      -moz-animation: none;
+      animation: none; }
+  .grid-demo .v-loading-indicator-delay {
+    width: 50%;
+    -webkit-transition-property: all;
+    -moz-transition-property: all;
+    transition-property: all;
+    -webkit-animation: v-progress-delay 3.8s;
+    -moz-animation: v-progress-delay 3.8s;
+    animation: v-progress-delay 3.8s;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    animation-fill-mode: forwards; }
+  .grid-demo .v-loading-indicator-wait {
+    width: 90%;
+    -webkit-transition-property: all;
+    -moz-transition-property: all;
+    transition-property: all;
+    -webkit-animation: v-progress-wait 5s, v-progress-wait-pulse 1s 4s infinite;
+    -moz-animation: v-progress-wait 5s, v-progress-wait-pulse 1s 4s infinite;
+    animation: v-progress-wait 5s, v-progress-wait-pulse 1s 4s infinite;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    animation-fill-mode: forwards; }
+  .grid-demo .v-loading-indicator {
+    background: #149ff0; }
+  .grid-demo .v-scrollable:focus {
+    outline: none; }
+  .grid-demo .v-captiontext,
+  .grid-demo .v-icon,
+  .grid-demo .v-errorindicator,
+  .grid-demo .v-required-field-indicator {
+    vertical-align: middle; }
+  .grid-demo .v-caption {
+    color: #919191;
+    font-size: .9em; }
+  .grid-demo .v-errorindicator {
+    color: #d93e26;
+    font-weight: 600;
+    width: 15px;
+    text-align: center; }
+    .grid-demo .v-errorindicator:before {
+      content: "!"; }
+  .grid-demo .v-shadow {
+    display: none; }
+  .grid-demo .v-filterselect-suggestpopup, .grid-demo .v-datefield-popup {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+    background-image: -webkit-linear-gradient(bottom, #f4f4f4, #f9f9f9);
+    background-image: linear-gradient(to top,#f4f4f4, #f9f9f9);
+    box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    border: 1px solid #d9d9d9;
+    -webkit-animation: v-veneer-fade-in 100ms ease-out;
+    -moz-animation: v-veneer-fade-in 100ms ease-out;
+    animation: v-veneer-fade-in 100ms ease-out;
+    opacity: 1;
+    -webkit-transform: translatez(0);
+    -moz-transform: translatez(0);
+    -ms-transform: translatez(0);
+    -o-transform: translatez(0);
+    transform: translatez(0); }
+    .grid-demo .v-filterselect-suggestpopup:focus, .grid-demo .v-datefield-popup:focus {
+      outline: none; }
+  .grid-demo .v-filterselect-suggestpopup {
+    overflow: hidden !important;
+    margin: .3em 0 !important;
+    padding: 10px 0; }
+  .grid-demo .v-filterselect-suggestpopup .gwt-MenuItem {
+    display: block;
+    white-space: nowrap;
+    cursor: pointer;
+    height: 23.07692px;
+    line-height: 23.07692px;
+    padding: 0 20px 0 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+  .grid-demo .v-filterselect-suggestpopup .gwt-MenuItem-selected {
+    color: white; }
+  .grid-demo .v-datefield-calendarpanel-day,
+  .grid-demo .v-button {
+    -webkit-touch-callout: none;
+    cursor: pointer;
+    border: 1px solid #b4b4b4;
+    border-radius: 4px;
+    padding: 0 12px;
+    height: 30px;
+    line-height: 28px;
+    color: #545454;
+    box-shadow: inset 0 -1px 0 #dddddd, inset 0 1px 0 #f3f3f3, 0 1px 0 rgba(255, 255, 255, 0.05);
+    border-top-color: #c3c3c3;
+    border-bottom-color: #a8a8a8;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+    -webkit-transition: border-color 100ms linear, box-shadow 100ms linear;
+    -moz-transition: border-color 100ms linear, box-shadow 100ms linear;
+    transition: border-color 100ms linear, box-shadow 100ms linear; }
+    .grid-demo .v-datefield-calendarpanel-day:active:after, .grid-demo .v-pressed.v-datefield-calendarpanel-day:after,
+    .grid-demo .v-button:active:after,
+    .grid-demo .v-button.v-pressed:after {
+      background-color: #6e6e6e;
+      opacity: 0.2 ;
+      -ms-filter: alpha(opacity=20%) ; }
+    .grid-demo .v-disabled.v-datefield-calendarpanel-day,
+    .grid-demo .v-button.v-disabled {
+      cursor: default; }
+      .grid-demo .v-disabled.v-datefield-calendarpanel-day:focus,
+      .grid-demo .v-button.v-disabled:focus {
+        box-shadow: none !important;
+        border-color: #e3e3e3 !important; }
+      .grid-demo .v-disabled.v-datefield-calendarpanel-day:active:after, .grid-demo .v-disabled.v-pressed.v-datefield-calendarpanel-day:after,
+      .grid-demo .v-button.v-disabled:active:after,
+      .grid-demo .v-button.v-disabled.v-pressed:after {
+        display: none; }
+  .grid-demo .v-filterselect {
+    position: relative; }
+  .grid-demo .v-filterselect-button {
+    width: 30px;
+    height: 30px;
+    position: absolute !important;
+    right: 0;
+    cursor: pointer; }
+    .grid-demo .v-filterselect-button:before {
+      speak: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-transform: none;
+      font-family: v-veneer-icons;
+      content: "\e601";
+      font-size: 15px;
+      line-height: 1;
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      margin-top: -8px;
+      width: 30px; }
+  .grid-demo .v-filterselect.v-disabled > .v-filterselect-button {
+    cursor: default;
+    pointer-events: none; }
+  .grid-demo .v-filterselect-suggestpopup table {
+    border-collapse: collapse;
+    border-spacing: 0; }
+  .grid-demo .v-filterselect-prevpage-off,
+  .grid-demo .v-filterselect-prevpage {
+    text-align: center;
+    cursor: pointer; }
+    .grid-demo .v-filterselect-prevpage-off span,
+    .grid-demo .v-filterselect-prevpage span {
+      display: none; }
+    .grid-demo .v-filterselect-prevpage-off:before,
+    .grid-demo .v-filterselect-prevpage:before {
+      speak: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-transform: none;
+      font-family: v-veneer-icons;
+      content: "\e604"; }
+  .grid-demo .v-filterselect-nextpage-off,
+  .grid-demo .v-filterselect-nextpage {
+    text-align: center;
+    cursor: pointer; }
+    .grid-demo .v-filterselect-nextpage-off span,
+    .grid-demo .v-filterselect-nextpage span {
+      display: none; }
+    .grid-demo .v-filterselect-nextpage-off:before,
+    .grid-demo .v-filterselect-nextpage:before {
+      speak: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-transform: none;
+      font-family: v-veneer-icons;
+      content: "\e601"; }
+  .grid-demo .v-filterselect-prevpage-off,
+  .grid-demo .v-filterselect-nextpage-off {
+    opacity: 0.3 ;
+    -ms-filter: alpha(opacity=30%) ;
+    cursor: default; }
+  .grid-demo .v-filterselect-status {
+    font-size: .8em;
+    text-align: right;
+    padding-right: 1em; }
+  .grid-demo .v-datefield {
+    position: relative; }
+  .grid-demo .v-datefield-textfield {
+    padding-right: 30px; }
+  .grid-demo .v-datefield-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    position: absolute !important;
+    right: 0;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: inherit; }
+    .grid-demo .v-datefield-button:before {
+      speak: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-transform: none;
+      font-family: v-veneer-icons;
+      content: "\e600";
+      font-size: 15px;
+      line-height: 1;
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      margin-top: -8px;
+      width: 30px; }
+    .grid-demo .v-datefield-button:focus {
+      outline: none; }
+  .grid-demo .v-disabled > .v-datefield-button {
+    cursor: default; }
+  .grid-demo .v-datefield-popup table {
+    border-collapse: collapse;
+    border-spacing: 0; }
+  .grid-demo .v-datefield-popup table,
+  .grid-demo .v-datefield-popup tbody,
+  .grid-demo .v-datefield-popup tr {
+    display: block; }
+  .grid-demo .v-datefield-popup td {
+    display: inline-block;
+    padding: 0; }
+  .grid-demo .v-datefield-calendarpanel:focus {
+    outline: none; }
+  .grid-demo .v-datefield-calendarpanel-body {
+    margin: -1px; }
+    .grid-demo .v-datefield-calendarpanel-body tr {
+      white-space: nowrap;
+      margin-bottom: -1px; }
+      .grid-demo .v-datefield-calendarpanel-body tr:last-child {
+        margin-bottom: 0; }
+    .grid-demo .v-datefield-calendarpanel-body td {
+      margin-right: -1px; }
+      .grid-demo .v-datefield-calendarpanel-body td:last-child {
+        margin-right: 0; }
+  .grid-demo .v-datefield-calendarpanel-day {
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+    background-color: #eaeaea;
+    background-image: -webkit-linear-gradient(bottom, #eaeaea, #efefef);
+    background-image: linear-gradient(to top,#eaeaea, #efefef);
+    border-radius: 0;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1); }
+    .grid-demo .v-datefield-calendarpanel-day:active:after, .grid-demo .v-datefield-calendarpanel-day.v-pressed:after {
+      background-color: #6e6e6e;
+      opacity: 0.2 ;
+      -ms-filter: alpha(opacity=20%) ; }
+  .grid-demo .v-datefield-calendarpanel-day-offmonth {
+    color: #bababa; }
+  .grid-demo .v-datefield-calendarpanel-day-today {
+    position: relative; }
+    .grid-demo .v-datefield-calendarpanel-day-today:before {
+      position: absolute;
+      bottom: 3.75px;
+      left: 50%;
+      margin-left: -1.875px;
+      content: "";
+      display: block;
+      width: 3.75px;
+      height: 3.75px;
+      border-radius: 50%;
+      background: #149ff0; }
+  .grid-demo .v-datefield-calendarpanel-day.v-datefield-calendarpanel-day-selected {
+    color: white;
+    box-shadow: inset 0 -1px 0 #108ae3, inset 0 1px 0 #2eb5f3;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1); }
+    .grid-demo .v-datefield-calendarpanel-day.v-datefield-calendarpanel-day-selected:before {
+      background: white; }
+  .grid-demo .v-datefield-calendarpanel-day.v-datefield-calendarpanel-day-focused {
+    position: relative;
+    z-index: 1;
+    font-weight: 600;
+    color: #149ff0; }
+    .grid-demo .v-datefield-calendarpanel-day.v-datefield-calendarpanel-day-focused.v-datefield-calendarpanel-day-selected {
+      color: white; }
+  .grid-demo .v-datefield-calendarpanel-header {
+    height: 30px;
+    line-height: 30px;
+    padding-bottom: 20px;
+    margin-bottom: -20px;
+    display: block;
+    white-space: nowrap;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-radius: 4px 4px 0 0; }
+    .grid-demo .v-datefield-calendarpanel-header td {
+      display: inline-block; }
+  .grid-demo .v-datefield-month .v-datefield-calendarpanel-header,
+  .grid-demo .v-datefield-year .v-datefield-calendarpanel-header {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-radius: 4px; }
+  .grid-demo .v-datefield-calendarpanel-weekdays {
+    height: 20px;
+    margin-left: -1px;
+    line-height: 20px;
+    color: #ababab; }
+    .grid-demo .v-datefield-calendarpanel-weekdays td {
+      text-align: center;
+      width: 30px; }
+    .grid-demo .v-datefield-calendarpanel-weekdays strong {
+      font-weight: 300;
+      font-size: .8em;
+      text-transform: uppercase;
+      letter-spacing: 0.05em; }
+  .grid-demo .v-datefield-calendarpanel-prevyear,
+  .grid-demo .v-datefield-calendarpanel-prevmonth,
+  .grid-demo .v-datefield-calendarpanel-nextyear,
+  .grid-demo .v-datefield-calendarpanel-nextmonth {
+    position: absolute;
+    top: 0;
+    width: 25px;
+    height: 30px; }
+    .grid-demo .v-datefield-calendarpanel-prevyear button,
+    .grid-demo .v-datefield-calendarpanel-prevmonth button,
+    .grid-demo .v-datefield-calendarpanel-nextyear button,
+    .grid-demo .v-datefield-calendarpanel-nextmonth button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      -ms-appearance: none;
+      -o-appearance: none;
+      appearance: none;
+      border: none;
+      background: transparent;
+      font: inherit;
+      text-shadow: inherit;
+      color: inherit;
+      font-size: 1.8em;
+      line-height: 1;
+      height: 16.66667px;
+      width: 13.88889px;
+      padding: 0;
+      margin: -.1em 0 0;
+      cursor: pointer; }
+      .grid-demo .v-datefield-calendarpanel-prevyear button:hover,
+      .grid-demo .v-datefield-calendarpanel-prevmonth button:hover,
+      .grid-demo .v-datefield-calendarpanel-nextyear button:hover,
+      .grid-demo .v-datefield-calendarpanel-nextmonth button:hover {
+        text-shadow: 0 0 0.25em #149ff0; }
+  .grid-demo .v-datefield-calendarpanel-prevyear {
+    left: 0; }
+  .grid-demo .v-datefield-calendarpanel-prevmonth {
+    left: 25px; }
+  .grid-demo .v-datefield-calendarpanel-nextyear {
+    right: 0; }
+  .grid-demo .v-datefield-calendarpanel-nextmonth {
+    right: 25px; }
+  .grid-demo .v-datefield-popup td.v-datefield-calendarpanel-month {
+    width: 100%;
+    text-align: center;
+    border-radius: 4px 4px 0 0; }
+    .grid-demo .v-datefield-popup td.v-datefield-calendarpanel-month > span {
+      font-size: 1.1em; }
+  .grid-demo .v-datefield-year td.v-datefield-calendarpanel-month {
+    width: 54px; }
+  .grid-demo .v-datefield-month td.v-datefield-calendarpanel-month {
+    width: 109px; }
+  .grid-demo .v-datefield-calendarpanel-weeknumber,
+  .grid-demo .v-datefield-calendarpanel-weekdays.v-datefield-calendarpanel-weeknumbers td:first-child {
+    display: inline-block;
+    width: 30px;
+    color: #a1a1a1;
+    text-align: center;
+    font-size: 0.8em; }
+  .grid-demo td.v-datefield-calendarpanel-time {
+    width: 100%;
+    text-align: center;
+    padding: 7.5px 0; }
+    .grid-demo td.v-datefield-calendarpanel-time .v-label {
+      display: inline-block;
+      padding: 0 .3em;
+      font-weight: 400; }
+    .grid-demo td.v-datefield-calendarpanel-time .v-select.v-select {
+      padding: .3em .55em;
+      line-height: 1;
+      height: auto; }
+    .v-ff .grid-demo td.v-datefield-calendarpanel-time .v-select.v-select {
+      padding: .15em 0 .15em .2em; }
+  .grid-demo .v-escalator {
+    background: transparent; }
+  .grid-demo .v-escalator-tablewrapper {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #b4b4b4; }
+  .grid-demo .v-escalator-cell {
+    font-size: 13px;
+    border-width: 0;
+    padding: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: white;
+    color: #666666; }
+    .grid-demo .v-escalator-cell:first-child {
+      padding-left: 10px; }
+    .grid-demo .v-escalator-cell:last-child {
+      padding-right: 10px; }
+  .grid-demo .v-escalator-cell.frozen {
+    border-right: 1px solid #ebebeb; }
+  .grid-demo .v-escalator-row:nth-child(odd) .v-escalator-cell {
+    background-color: #fafafa; }
+  .grid-demo .v-escalator-header,
+  .grid-demo .v-escalator-footer {
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1); }
+    .grid-demo .v-escalator-header .v-escalator-row .v-escalator-cell,
+    .grid-demo .v-escalator-footer .v-escalator-row .v-escalator-cell {
+      background-color: #eaeaea;
+      color: #545454; }
+    .grid-demo .v-escalator-header .v-escalator-row:first-child .v-escalator-cell,
+    .grid-demo .v-escalator-footer .v-escalator-row:first-child .v-escalator-cell {
+      background-color: #eaeaea;
+      background-image: -webkit-linear-gradient(bottom, #eaeaea, #efefef);
+      background-image: linear-gradient(to top,#eaeaea, #efefef); }
+    .grid-demo .v-escalator-header .v-escalator-cell.frozen,
+    .grid-demo .v-escalator-footer .v-escalator-cell.frozen {
+      border-right-color: #d9d9d9; }
+  .grid-demo .v-escalator-header .v-escalator-row:last-child .v-escalator-cell {
+    border-bottom: 1px solid #b6b6b6; }
+  .grid-demo .v-escalator-footer .v-escalator-row:first-child .v-escalator-cell {
+    border-top: 1px solid #b6b6b6; }
+  .grid-demo .v-gridlayout-margin-top {
+    padding-top: 17px; }
+  .grid-demo .v-gridlayout-margin-bottom {
+    padding-bottom: 17px; }
+  .grid-demo .v-gridlayout-margin-left {
+    padding-left: 17px; }
+  .grid-demo .v-gridlayout-margin-right {
+    padding-right: 17px; }
+  .grid-demo .v-gridlayout-spacing-on {
+    padding-left: 10px;
+    padding-top: 10px; }
+  .grid-demo .v-gridlayout-spacing,
+  .grid-demo .v-gridlayout-spacing-off {
+    padding-left: 0;
+    padding-top: 0; }
+  .grid-demo .v-verticallayout.v-margin-top,
+  .grid-demo .v-horizontallayout.v-margin-top {
+    padding-top: 17px; }
+  .grid-demo .v-verticallayout.v-margin-right,
+  .grid-demo .v-horizontallayout.v-margin-right {
+    padding-right: 17px; }
+  .grid-demo .v-verticallayout.v-margin-bottom,
+  .grid-demo .v-horizontallayout.v-margin-bottom {
+    padding-bottom: 17px; }
+  .grid-demo .v-verticallayout.v-margin-left,
+  .grid-demo .v-horizontallayout.v-margin-left {
+    padding-left: 17px; }
+  .grid-demo .v-spacing {
+    width: 10px;
+    height: 10px; }
+  .grid-demo .v-button-danger {
+    background-color: #d0301d;
+    background-image: -webkit-linear-gradient(bottom, #d0301d, #e14b2e);
+    background-image: linear-gradient(to top,#d0301d, #e14b2e);
+    color: white;
+    border-color: #aa5c50;
+    box-shadow: inset 0 -1px 0 #ca311e, inset 0 1px 0 #e15940, 0 1px 0 rgba(255, 255, 255, 0.05);
+    border-top-color: #bb7c73;
+    border-bottom-color: #9e554a;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1);
+    font-weight: 600; }
+    .grid-demo .v-button-danger:focus {
+      outline: none;
+      border-color: #942a1a;
+      box-shadow: inset 0 -1px 0 #ca311e, inset 0 1px 0 #e15940, 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 3px 1px #d93e26; }
+    .grid-demo .v-button-danger:active:after, .grid-demo .v-button-danger.v-pressed:after {
+      background-color: black;
+      opacity: 0.2 ;
+      -ms-filter: alpha(opacity=20%) ; }
+  .grid-demo .v-button-primary {
+    background-color: #0f89ec;
+    background-image: -webkit-linear-gradient(bottom, #0f89ec, #18b4f3);
+    background-image: linear-gradient(to top,#0f89ec, #18b4f3);
+    color: white;
+    border-color: #478db5;
+    box-shadow: inset 0 -1px 0 #108ae3, inset 0 1px 0 #2eb5f3, 0 1px 0 rgba(255, 255, 255, 0.05);
+    border-top-color: #6ba3c3;
+    border-bottom-color: #4283a8;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    padding-left: 19px;
+    padding-right: 19px; }
+    .grid-demo .v-button-primary:focus {
+      outline: none;
+      border-color: #0b6ea8;
+      box-shadow: inset 0 -1px 0 #108ae3, inset 0 1px 0 #2eb5f3, 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 3px 1px #149ff0; }
+    .grid-demo .v-button-primary:active:after, .grid-demo .v-button-primary.v-pressed:after {
+      background-color: #020303;
+      opacity: 0.2 ;
+      -ms-filter: alpha(opacity=20%) ; }
+
+@font-face {
+  font-family: "v-veneer-icons";
+  src: url("../veneer/shared/icons/veneer-icons/veneer-icons.eot");
+  src: url("../veneer/shared/icons/veneer-icons/veneer-icons.eot?#iefix") format("embedded-opentype"), url("../veneer/shared/icons/veneer-icons/veneer-icons.ttf") format("truetype"), url("../veneer/shared/icons/veneer-icons/veneer-icons.woff") format("woff"), url("../veneer/shared/icons/veneer-icons/veneer-icons.svg#veneer-icons") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("../veneer/shared/fonts/source-sans-pro/sourcesanspro-regular.eot");
+  src: url("../veneer/shared/fonts/source-sans-pro/sourcesanspro-regular.eot?#iefix") format("embedded-opentype"), url("../veneer/shared/fonts/source-sans-pro/sourcesanspro-regular.woff") format("woff"), url("../veneer/shared/fonts/source-sans-pro/sourcesanspro-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal; }
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("../veneer/shared/fonts/source-sans-pro/sourcesanspro-it.eot");
+  src: url("../veneer/shared/fonts/source-sans-pro/sourcesanspro-it.eot?#iefix") format("embedded-opentype"), url("../veneer/shared/fonts/source-sans-pro/sourcesanspro-it.woff") format("woff"), url("../veneer/shared/fonts/source-sans-pro/sourcesanspro-it.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic; }
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("../veneer/shared/fonts/source-sans-pro/sourcesanspro-semibold.eot");
+  src: url("../veneer/shared/fonts/source-sans-pro/sourcesanspro-semibold.eot?#iefix") format("embedded-opentype"), url("../veneer/shared/fonts/source-sans-pro/sourcesanspro-semibold.woff") format("woff"), url("../veneer/shared/fonts/source-sans-pro/sourcesanspro-semibold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal; }
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("../veneer/shared/fonts/source-sans-pro/sourcesanspro-semiboldit.eot");
+  src: url("../veneer/shared/fonts/source-sans-pro/sourcesanspro-semiboldit.eot?#iefix") format("embedded-opentype"), url("../veneer/shared/fonts/source-sans-pro/sourcesanspro-semiboldit.woff") format("woff"), url("../veneer/shared/fonts/source-sans-pro/sourcesanspro-semiboldit.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic; }

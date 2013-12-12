@@ -1,0 +1,131 @@
+@import "loading-indicator";
+@import "overlay";
+//@import "notifications";
+
+
+@mixin v-veneer-app-style {
+  font: normal #{$v-font-size}/#{$v-line-height} $v-font-family;
+  color: $v-font-color;
+  background-color: $v-app-background-color;
+  
+  // Use Helvetica Neue for Mac instead of Helvetica, which has a slightly different baseline
+  @if $v-font-family == sans-serif {
+  	.v-mac & {
+        font-family: "Helvetica Neue", sans-serif;
+  	}
+  }
+}
+
+@mixin v-veneer-global {
+  
+  @if & != null {
+    &,
+    &.v-app-loading {
+      @include v-veneer-app-style;
+    }
+  } @else {
+    .v-app,
+    .v-app-loading {
+      @include v-veneer-app-style;
+    }
+  }
+  
+  @include v-veneer-loading-bar;
+  
+  .v-loading-indicator {
+    background: $v-primary-color;
+  }
+  
+  //$_spinner-size: $v-unit-size;
+  // Make the spinner divisible by 2
+  //$_spinner-size: $_spinner-size + $_spinner-size%2;
+  /*.v-loading-indicator {
+    top: $_spinner-size;
+    left: 50%;
+    margin-left: $_spinner-size/-2;
+    z-index: 30000;
+  }
+  
+  .v-loading-indicator,
+  .v-app-loading:before {
+    @include v-veneer-spinner($size: $_spinner-size);
+  }
+  
+  .v-loading-indicator-delay {
+    border-width: ceil($_spinner-size/5);
+  }
+  
+  .v-loading-indicator-wait {
+  	border-color: transparentize($v-secondary-color, .8);
+    border-top-color: transparentize($v-secondary-color, .15);
+    border-right-color: transparentize($v-secondary-color, .15);
+    border-width: ceil($_spinner-size/4);
+  }
+  
+  .v-app-loading:before {
+      content: "";
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      margin-top: $_spinner-size/-2;
+      margin-left: $_spinner-size/-2;
+    }
+  }*/
+  
+  //@include vaadin-veneer-notifications-bundle;
+  
+  .v-disabled {
+    @extend %v-veneer-disabled-style;
+  }
+  
+  .v-scrollable:focus {
+    outline: none;
+  }
+  
+  .v-captiontext,
+  .v-icon,
+  .v-errorindicator,
+  .v-required-field-indicator {
+    vertical-align: middle;
+  }
+  
+  .v-caption {
+    color: if(color-luminance($v-app-background-color) > 170, lighten($v-font-color, 20%), darken($v-font-color, 20%));
+    font-size: .9em;
+  }
+  
+  .v-errorindicator {
+    color: $v-warning-color;
+    font-weight: 600;
+    width: ceil($v-unit-size/2);
+    text-align: center;
+    
+    &:before {
+      content: "!";
+    }
+  }
+  
+  @include v-veneer-overlay;
+  
+}
+
+
+// Generate linear gradient placholders for common colors to reduce duplication
+$v-veneer-gradient-colors: 
+              $v-selection-color,
+              $v-widget-color, 
+              $v-primary-color, 
+              $v-secondary-color, 
+              $v-tertiary-color !default;
+
+@each $color in $v-veneer-gradient-colors {
+  // One placeholder from 1% to 100% (placeholders cost nothing, only if they are used)
+  @for $i from 1 through 100 {
+    %v-veneer-linear-gradient-#{$color}-#{$i} {
+      @if $v-gradient-depth > 0 {
+      	$amt: $i * 1%;
+        @include v-veneer-gradient($color: $color, $style: linear, $depth: $amt, $avoid-extend: true);
+      }
+    }
+  }
+}

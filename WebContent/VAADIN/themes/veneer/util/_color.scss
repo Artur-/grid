@@ -1,0 +1,195 @@
+// Returns the luminance of a color (0-255)
+// (perceived brightness, rather than absolute mathematical lightness value)
+//
+// "The luminance calculation is a weighted average of the color channels that approximates 
+// how humans perceive brightness, while lightness is just an average of the largest and 
+// smallest channels without regard to perception."
+//
+// Source for equation: http://en.wikipedia.org/wiki/Luminance_(relative)
+@function color-luminance ($color) {
+  @return 0.2126 * red($color) + 0.7152 * green($color) + 0.0722 * blue($color);
+}
+
+
+// Arbitrary luminance thresholds after which colors should be adjusted either darker or lighter
+$vaadin-bg-luminance-threshold: 50;
+$vaadin-text-luminance-threshold: 160;
+
+
+
+// Returns a text color with enough contrast for the given background color
+//
+@function text-color ($bg-color) {
+  @if $bg-color {
+    @if color-luminance($bg-color) > $vaadin-text-luminance-threshold {
+      @return scale_color(adjust_color($bg-color, $lightness: -60%), $saturation: -70%);
+    } @else {
+      @return scale_color(adjust_color($bg-color, $lightness: 50%), $saturation: -70%)
+    }
+  } @else {
+    @return null;
+  }
+}
+
+
+@function text-color-disabled ($bg-color) {
+  @return if(color-luminance($bg-color) > 170, adjust-color($bg-color, $lightness: -20%, $saturation: -6%), adjust-color($bg-color, $lightness: 20%, $saturation: -6%))
+}
+
+
+@function text-color-light ($bg-color) {
+  @return if(color-luminance($bg-color) > 170, adjust-color($bg-color, $lightness: -30%, $saturation: -3%), adjust-color($bg-color, $lightness: 30%, $saturation: -3%))
+}
+
+
+@function header-color ($bg-color) {
+  $text-color: text-color($bg-color);
+  @if color-luminance($bg-color) > $vaadin-text-luminance-threshold {
+    @return darken($text-color, 20%);
+  } @else {
+    @return lighten($text-color, 30%);
+  }
+}
+
+
+
+
+
+// Returns a sane background color for the given primary color
+//
+@function bg-color ($color) {
+  $bg-color: $color;
+  @if color-luminance($color) > 122 {
+    $bg-color: lighten($bg-color, 14%);
+  } @else {
+    $bg-color: darken($bg-color, 10%);
+  }
+  $bg-color: scale-color($bg-color, $saturation: -50%);
+  @return $bg-color;
+}
+
+
+
+
+// Returns a sane link color for the given primary color
+//
+@function link-color ($color) {
+  $link: $color;
+  @if color-luminance($color) > 122 {
+    $link: scale-color($link, $lightness: -50%);
+  } @else {
+    $link: scale-color($link, $lightness: 50%);
+  }
+  @if saturation($color) > 0 {
+    @return scale-color($link, $saturation: 5%);
+  } @else {
+    @return $link;
+  }
+}
+
+
+// Returns a sane selection color for the given primary color
+//
+@function selection-color ($color) {
+  $selection: $color;
+  @if color-luminance($color) > 122 {
+    $selection: scale-color($selection, $lightness: -50%);
+  } @else {
+    $selection: scale-color($selection, $lightness: 50%);
+  }
+  @if saturation($color) > 0 {
+    @return scale-color($selection, $saturation: 5%);
+  } @else {
+    @return $selection;
+  }
+}
+
+
+
+
+
+@function textfield-bg-color ($bg-color) {
+  @if color-luminance($bg-color) > $vaadin-text-luminance-threshold {
+    @return #fff;
+  } @else {
+    @return scale-color($bg-color, $lightness: -20%, $saturation: -15%);
+  }
+}
+
+
+@function textfield-border-color ($context-bg-color) {
+  @if color-luminance($context-bg-color) > $vaadin-bg-luminance-threshold {
+    @return mix(color-multiply(#000, $context-bg-color, 50%), $context-bg-color, 66%)
+  } @else {
+    @return mix(color-screen(#fff, $context-bg-color, 50%), $context-bg-color, 66%)
+  }
+}
+
+
+
+
+@function button-border-color ($button-bg-color, $context-bg-color) {
+  @if color-luminance($context-bg-color) > $vaadin-bg-luminance-threshold {
+    @return mix(color-multiply(#000, $context-bg-color, 50%), $button-bg-color, 50%)
+  } @else {
+    @return mix(color-screen(#fff, $context-bg-color, 50%), $button-bg-color, 50%)
+  }
+}
+
+
+
+
+@function border-color ($bg-color) {
+  @if color-luminance($bg-color) > $vaadin-bg-luminance-threshold {
+    @return darken($bg-color, 8%);
+  } @else {
+    @return lighten($bg-color, 8%);
+  }
+}
+
+
+
+
+// Blends the given colors using the overlay blend mode
+//
+@function color-overlay($top, $bottom, $amount: 100%) {
+  $_red: false;
+  $_green: false;
+  $_blue: false;
+	
+  @if red($bottom) < 128 {
+     $_red: (2 * red($top) * red($bottom) / 255);
+  } @else {
+    $_red: (255 - 2 * (255 - red($top)) * (255 - red($bottom)) / 255) 
+  }
+  @if green($bottom) < 128 {
+     $_green: (2 * green($top) * green($bottom) / 255);
+  } @else {
+    $_green: (255 - 2 * (255 - green($top)) * (255 - green($bottom)) / 255) 
+  }
+  @if blue($bottom) < 128 {
+     $_blue: (2 * blue($top) * blue($bottom) / 255);
+  } @else {
+    $_blue: (255 - 2 * (255 - blue($top)) * (255 - blue($bottom)) / 255) 
+  }
+  
+  @return mix(rgb($_red, $_green, $_blue), $bottom, $amount);
+}
+
+
+@function color-multiply($top, $bottom, $amount: 100%) {
+  $_red: red($top) * red($bottom) / 255;
+  $_green: green($top) * green($bottom) / 255; 
+  $_blue: blue($top) * blue($bottom) / 255; 
+  @return mix(rgb($_red, $_green, $_blue), $bottom, $amount);
+}
+
+
+
+@function color-screen ($top, $bottom, $amount) {
+  $_red: (255 - ( ( (255 - red($top)) * (255 - red($bottom))) / 256));
+  $_green: (255 - ( ( (255 - green($top)) * (255 - green($bottom))) / 256));
+  $_blue: (255 - ( ( (255 - blue($top)) * (255 - blue($bottom))) / 256));
+
+  @return mix(rgb($_red, $_green, $_blue), $bottom, $amount);
+}
