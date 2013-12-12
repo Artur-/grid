@@ -31,7 +31,6 @@
   line-height: $unit-size - $border-width*2;
   font-size: $font-size;
   
-  @debug $color;
   @if $color {
     color: $color;
   } @else {
