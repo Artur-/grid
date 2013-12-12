@@ -1,0 +1,75 @@
+@mixin vaadin-veneer-optiongroup-bundle {
+  
+  .v-radiobutton {
+  	
+  	position: relative;
+    line-height: $vaadin-scale/2;
+    
+    & > input {
+      position: absolute;
+      left: .2em;
+      top: .2em;
+      z-index: 0;
+      margin: 0;
+      @include opacity(0);
+      
+      &:focus ~ label:before {
+        @extend %vaadin-tune-focus-styles;
+      }
+      
+      // &[checked] ~ label:after,
+      &:checked ~ label:after {
+      	display: inline-block;
+        width: $vaadin-scale/2;
+        //margin-top: -$vaadin-tune-border-width;
+        text-align: center;
+        content: "●";
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        color: $vaadin-primary-color;
+      }
+    }
+    
+    & > label:before {
+      content: "";
+      @extend %vaadin-veneer-button;
+      display: inline-block;
+      @include box-sizing(border-box);
+      padding: 0;
+      width: $vaadin-scale/2;
+      height: $vaadin-scale/2;
+      vertical-align: -.25em;
+      margin-right: .5em;
+      position: relative;
+      z-index: 1;
+      border-radius: 50%;
+    }
+    
+    & > .v-icon  {
+      margin: 0 .3em 0 $vaadin-scale/2;
+      vertical-align: -.2em;
+      
+      & + label:before {
+        position: absolute;
+        left: 0;
+      }
+    }
+    
+  }
+  
+  .v-select-optiongroup {
+  
+    .v-radiobutton,
+    .v-checkbox {
+      display: block;
+      margin: $vaadin-scale/4 1em 0 0;
+      
+      &:first-child {
+        margin-top: $vaadin-scale/6;
+      }
+    }
+  
+  }
+  
+}

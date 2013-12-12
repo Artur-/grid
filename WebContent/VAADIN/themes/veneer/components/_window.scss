@@ -1,0 +1,242 @@
+@mixin vaadin-veneer-window-bundle {
+  
+  .v-window-draggingCurtain {
+    position: fixed !important;
+  }
+  
+  .v-window {
+    @extend %tune-overlay;
+    box-shadow: $vaadin-overlay-window-box-shadow;
+    background-color: scale-color($vaadin-bg-color, $lightness: 5%);
+    min-width: 4*$vaadin-scale + em !important;
+    min-height: $vaadin-scale !important;
+    overflow: hidden !important;
+  }
+  
+  .v-window-outerheader {
+    position: relative;
+    cursor: move;
+    height: 0;
+    z-index: 3;
+  }
+
+  .v-window-header {
+    $_font-size: 1.2;
+  	@extend %no-selection;
+    line-height: $vaadin-line-height/$_font-size;
+    font-size: $_font-size + em;
+    //font-weight: 200;
+    padding: ($vaadin-scale/$_font-size - $_font-size)/2 + em
+              $vaadin-scale/$_font-size*2 + em   
+             ($vaadin-scale/$_font-size - $_font-size)/2 + em   
+              $vaadin-scale/$_font-size/2 + em;
+    background-color: $vaadin-ui-color;
+    //@if $vaadin-tune-border-width > 0 {
+      //margin: #{-$vaadin-tune-border-width} #{-$vaadin-tune-border-width} 0;
+      //border: $vaadin-tune-border-width solid tune-ui-border-color($vaadin-ui-color);
+      //border-bottom: none;
+    //}
+    @if $vaadin-gradient-style and $vaadin-gradient-depth > 0 {
+      //@include vaadin-veneer-linear-gradient($vaadin-ui-color);
+    }
+    color: text-color($vaadin-ui-color);
+    
+    //@if $vaadin-tune-border-radius > 0 and tune-value-to-scale($vaadin-tune-border-radius) > $vaadin-scale/3 {
+    //  border-radius: $vaadin-scale/3/$_font-size + em
+    //} @else if $vaadin-tune-border-radius > 0 {
+    //  border-radius: $vaadin-tune-border-radius/$_font-size $vaadin-tune-border-radius/$_font-size 0 0;
+    //}
+    @include opacity(.95);
+  }
+  
+  .v-window-closebox,
+  .v-window-maximizebox,
+  .v-window-restorebox {
+    position: absolute;
+    z-index: 3;
+    width: $vaadin-scale + em;
+    height: $vaadin-scale + em;
+    text-align: center;
+    //top: $vaadin-tune-border-width;
+    right: 0;
+    cursor: pointer;
+    color: text-color($vaadin-ui-color);
+    background-color: $vaadin-ui-color;
+    
+    &:before {
+      //font-weight: 200;
+      font-size: 1.6em;
+      line-height: $vaadin-scale/1.6;
+    }
+    
+    &:focus {
+      outline: none;
+    }
+    
+    &:hover {
+      color: $vaadin-primary-color;
+    }
+    
+    &:active {
+      background: $vaadin-primary-color;
+      color: text-color($vaadin-primary-color);      
+    }
+  }
+  
+  .v-window-closebox {
+  	//$_color: tune-color-variant($vaadin-ui-color, 6%);
+    //@if $vaadin-tune-gradient-style and $vaadin-tune-gradient-depth > 0 {
+    //  @include tune-linear-gradient($_color);
+    //} @else {
+    //  background-color: $_color;
+    //}
+    
+    //@if $vaadin-tune-border-radius > 0 {
+    //  border-radius: 0 $vaadin-tune-border-radius 0 0;
+    //}
+    
+    &:before {
+      content: "×";
+    }
+  }
+  
+  .v-window-maximizebox,
+  .v-window-restorebox {
+    /*$_color: tune-color-variant($vaadin-ui-color, 3%);
+    @if $vaadin-tune-gradient-style and $vaadin-tune-gradient-depth > 0 {
+      @include tune-linear-gradient($_color);
+    } @else {
+      background-color: $_color;
+    }*/
+    right: $vaadin-scale;
+  }
+  
+  .v-window-maximizebox {
+    &:before {
+      content: "+";
+    }
+  }
+  
+  .v-window-restorebox {
+    &:before {
+      content: "–";
+    }
+  }
+  
+  .v-window-resizebox {
+    position: absolute;
+    z-index: 3;
+    bottom: 0;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    line-height: 1em;
+    cursor: se-resize;
+    @include opacity(0.5);
+    
+    @include vaadin-veneer-icon(window-resizer);
+    
+    &:hover,
+    &:active {
+      @include opacity(1);
+    }
+  }
+  
+  .v-window > .popupContent,
+  .v-window-wrap,
+  .v-window-contents,
+  .v-window-contents > .v-scrollable {
+    height: 100%;
+  }
+  
+  .v-window-contents {
+    @include box-sizing(border-box);
+  	@if $vaadin-border-radius > 0 {
+      border-radius: $vaadin-border-radius;
+    }
+    overflow: hidden;
+  }
+  
+  .v-window-contents > .v-scrollable:focus {
+    outline: none;
+  }
+  
+  //@include scrolling-top-shadow($bg-color: scale-color($vaadin-bg-color, $lightness: 5%), $scroll-selector: ".v-window-contents > .v-scrollable", $parent-selector: ".v-window-contents", $top: $vaadin-scale + em);
+  
+  /*.v-window-contents > .v-scrollable {
+  	padding-top: $vaadin-scale + em;
+    @include box-sizing(border-box);
+       
+    & > .v-margin-top {
+      padding-top: $vaadin-scale/2 + em;
+    }
+    & > .v-margin-right {
+      padding-right: $vaadin-scale/2 + em;
+    }
+    & > .v-margin-bottom {
+      padding-bottom: $vaadin-scale/2 + em;
+    }
+    & > .v-margin-left {
+      padding-left: $vaadin-scale/2 + em;
+    }
+  }*/
+  
+  
+}
+
+
+
+
+@mixin vaadin-veneer-window-variant (
+          $header-color: null
+  ) {
+  
+  @if $header-color {
+    .v-window-header {
+      @if $vaadin-gradient-style and $vaadin-gradient-depth > 0 {
+        @include vaadin-veneer-linear-gradient($header-color);
+      } @else {
+        background: $header-color;
+      }
+      //@if $vaadin-tune-border-width > 0 {
+      //  border-color: $header-color;
+      //}
+      color: text-color($header-color);
+      @if $vaadin-emboss-style and $vaadin-emboss-depth > 0 {
+        text-shadow: vaadin-veneer-emboss-text-shadow($bg-color: $header-color);
+      }
+    }
+    
+    .v-window-closebox {
+      $_color: tune-color-variant($header-color, 8%);
+      @if $vaadin-tune-gradient-style and $vaadin-tune-gradient-depth > 0 {
+        @include tune-linear-gradient($_color);
+      } @else {
+        background: $_color;
+      }
+      color: tune-text-color($header-color);
+    }
+    
+    .v-window-maximizebox,
+    .v-window-restorebox {
+      $_color: tune-color-variant($header-color, 4%);
+      @if $vaadin-tune-gradient-style and $vaadin-tune-gradient-depth > 0 {
+        @include tune-linear-gradient($_color);
+      } @else {
+        background: $_color;
+      }
+      color: tune-text-color($header-color);
+    }
+    
+    .v-window-closebox,
+    .v-window-maximizebox,
+    .v-window-restorebox {
+      &:hover {
+        background: $vaadin-ui-color;
+        color: tune-text-color($vaadin-ui-color);
+      }
+    }
+  }
+  
+}

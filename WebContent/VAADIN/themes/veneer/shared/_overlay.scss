@@ -1,0 +1,53 @@
+@mixin v-veneer-overlay {
+
+  .v-shadow {
+    display: none;
+  }
+    
+  %v-veneer-overlay {
+    @include box-sizing(border-box);
+    @include v-veneer-gradient($v-app-background-color, ceil($v-gradient-depth/2));
+    box-shadow: $v-overlay-box-shadow;
+    border-radius: $v-border-radius;
+    border: $v-widget-border-width solid border-color($v-widget-color);
+    
+    @if $v-enable-animations {
+      @include v-veneer-anim-fade-in;
+      @include transform( translatez(0) );
+    }
+    
+    &:focus {
+      outline: none;
+    }
+  }
+  
+  
+  
+  %v-veneer-selection-popup {
+    @extend %v-veneer-overlay;
+    overflow: hidden !important;
+    margin: .3em 0 !important;
+    padding: $v-layout-spacing-vertical 0;
+  }
+  
+  %v-veneer-selection-item {
+    display: block;
+    white-space: nowrap;
+    cursor: pointer;
+    @extend %no-selection;
+    height: $v-unit-size/1.3;
+    line-height: $v-unit-size/1.3;
+    padding: 0 $v-layout-spacing-horizontal*2 0 $v-layout-spacing-horizontal;
+    @include box-sizing(border-box);
+  }
+  
+  %v-veneer-selection-item-selected {
+    @include v-veneer-gradient($v-selection-color);
+    color: text-color($v-selection-color);
+    
+    &:active {
+      @extend %v-veneer-active-style;
+    }
+  }
+
+}

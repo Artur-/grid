@@ -1,0 +1,24 @@
+@import "../veneer/util/color";
+
+$v-font-family: "Helvetica Neue", sans-serif;
+$v-font-size: 15px;
+$v-unit-size: 36px;
+$v-border-radius: 0;
+
+$v-app-background-color: #fff;
+$v-selection-color: #07c073;
+$v-warning-color: #d41152;
+
+$v-gradient-depth: 0%;
+$v-emboss-depth: 0%;
+
+$v-widget-border-width: 0;
+$v-focus-box-shadow: 0 0 0 2px $v-selection-color;
+
+$v-textfield-background-color: #eee;
+$v-textfield-box-shadow: none;
+
+$v-button-padding-width: ceil($v-unit-size/2);
+$v-button-font-color: $v-selection-color;
+
+$v-overlay-box-shadow: 0 0 0 2px #ccc;

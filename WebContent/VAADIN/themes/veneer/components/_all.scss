@@ -1,0 +1,76 @@
+// Import shared component mixins and placeholders
+@import "../shared/component-states";
+//@import "../shared/overlay";
+//@import "../shared/contextmenu";
+
+
+// Import all component mixins
+// None of the imports should output anything by itself, only when a mixin is called
+// (some come from the Base theme, since they require no extra modifications)
+//@import "accordion";
+@import "button";
+//@import "calendar";
+//@import "checkbox";
+//@import "colorpicker";
+@import "combobox";
+@import "datefield";
+//@import "dragwrapper";
+//@import "formlayout";
+@import "grid";
+@import "gridlayout";
+@import "label";
+//@import "link";
+//@import "loginform";
+//@import "menubar";
+//@import "nativeselect";
+//@import "notification";
+//@import "optiongroup";
+@import "orderedlayout";
+//@import "panel";
+//@import "popupview";
+//@import "progressindicator";
+//@import "slider";
+//@import "splitpanel";
+//@import "table";
+//@import "tabsheet";
+@import "textfield";
+//@import "textarea";
+//@import "tree";
+//@import "treetable";
+//@import "upload";
+//@import "window";
+
+
+
+@mixin v-veneer-components {
+  
+  @if include-vaadin-component(button) {
+  	@include v-veneer-button;
+  }
+  
+  @if include-vaadin-component(combobox) {
+  	@include v-veneer-combobox;
+  }
+  
+  @if include-vaadin-component(datefield) {
+  	@include v-veneer-datefield;
+  }
+  
+  @if include-vaadin-component(grid) {
+  	// TODO the default primary-stylename is wrong
+  	@include v-veneer-grid(v-escalator);
+  }
+  
+  @if include-vaadin-component(gridlayout) {
+  	@include v-veneer-gridlayout;
+  }
+  
+  @if include-vaadin-component(orderedlayout) {
+  	@include v-veneer-orderedlayout;
+  }
+  
+  @if include-vaadin-component(textfield) {
+  	@include v-veneer-textfield;
+  }
+  
+}

@@ -1,0 +1,120 @@
+@import "../util/color";
+@import "../util/util";
+
+$v-font-size: 100% !default;
+$v-line-height: 1.5 !default;
+$v-font-family: sans-serif !default;
+
+// This needs to be a pixel value
+$v-unit-size: if(unit($v-font-size) == px, floor($v-font-size*2.2), floor(16*2.2px)) !default;
+
+$v-background-luminance-threshold: 122 !default;
+
+$v-app-background-color: #fff !default;
+$v-app-background-color-alt: if(color-luminance($v-app-background-color) > $v-background-luminance-threshold, darken($v-app-background-color, 5%), lighten($v-app-background-color, 5%)) !default;
+$v-app-background-color-alt2: if(color-luminance($v-app-background-color) > $v-background-luminance-threshold, darken($v-app-background-color, 10%), lighten($v-app-background-color, 10%)) !default;
+$v-widget-color: if(color-luminance($v-app-background-color) > $v-background-luminance-threshold, scale-color($v-app-background-color, $lightness: -10%), scale-color($v-app-background-color, $lightness: 10%)) !default;
+
+$v-selection-color: selection-color($v-app-background-color) !default;
+$v-font-color: text-color($v-app-background-color) !default;
+
+$v-border-color: border-color($v-app-background-color) !default;
+
+$v-widget-border-width: 1px !default;
+
+$v-layout-margin-top: ceil($v-unit-size/1.8) !default;
+$v-layout-margin-right: ceil($v-unit-size/1.8) !default;
+$v-layout-margin-bottom: ceil($v-unit-size/1.8) !default;
+$v-layout-margin-left: ceil($v-unit-size/1.8) !default;
+
+$v-layout-spacing-vertical: ceil($v-unit-size/3) !default;
+$v-layout-spacing-horizontal: ceil($v-unit-size/3) !default;
+
+
+
+$v-border-radius: 4px !default;
+$v-button-border-radius: $v-border-radius !default;
+$v-button-border-width: $v-widget-border-width !default;
+$v-button-padding-width: ceil($v-unit-size/2.5) !default;
+$v-button-font-color: null !default;
+
+
+
+
+
+$v-textfield-font-color: null !default;
+$v-textfield-background-color: textfield-bg-color($v-app-background-color) !default;
+$v-textfield-prompt-font-color: mix($v-textfield-background-color, $v-font-color, 50%) !default;
+$v-textfield-prompt-font-style: null !default;
+$v-textfield-border-width: $v-widget-border-width !default;
+$v-textfield-border-style: solid !default;
+$v-textfield-border-color: textfield-border-color($v-app-background-color) !default;
+$v-textfield-border: $v-textfield-border-width $v-textfield-border-style $v-textfield-border-color;
+$v-textfield-border-radius: $v-border-radius !default;
+$v-textfield-padding-width: ceil($v-unit-size/4) !default;
+
+
+$v-gradient-depth: 20% !default;
+$v-gradient-style: linear !default;
+
+$v-emboss-depth: 20% !default;
+$v-emboss-style: pillow !default;
+$v-emboss-text-shadow: 0 1px 0 !default;
+$v-emboss-text-shadow-alt: 0 -1px 0 !default;
+
+$v-primary-color: $v-selection-color !default;
+$v-secondary-color: #F2724C !default;
+$v-tertiary-color: #5DC27B !default;
+$v-warning-color: #d93e26 !default;
+
+$v-enable-hover-styles: true !default;
+$v-enable-animations: true !default;
+
+// Internal default values
+$_veneer-emboss-inner-box-shadow: none;
+$_veneer-emboss-outer-box-shadow: none;
+$_veneer-overlay-box-shadow: 0 2px 6px -1px rgba(0,0,0,.3);
+
+$_input-outer-box-shadow-opacity: $v-emboss-depth/100% + (color-luminance($v-app-background-color)/255)/2;
+$_veneer-input-box-shadow: inset 0 1px rgba(0,0,0,.03), 0 1px 0 rgba(255,255,255,$_input-outer-box-shadow-opacity);
+$_veneer-overlay-window-box-shadow: 0 2px 10px 0 rgba(0,0,0,.2);
+
+@if $v-emboss-depth > 0 {
+  $_veneer-emboss-inner-box-shadow: v-veneer-emboss-inner-box-shadow();
+  $_veneer-emboss-outer-box-shadow: v-veneer-emboss-outer-box-shadow();
+}
+
+// Set the public defaults
+$v-emboss-inner-box-shadow: $_veneer-emboss-inner-box-shadow !default;
+$v-emboss-outer-box-shadow: $_veneer-emboss-outer-box-shadow !default;
+
+$_veneer-emboss-box-shadow: none;
+@if $v-emboss-inner-box-shadow != none and $v-emboss-outer-box-shadow == none {
+  $_veneer-emboss-box-shadow: $v-emboss-inner-box-shadow;
+} @else if $v-emboss-inner-box-shadow == none and $v-emboss-outer-box-shadow != none {
+  $_veneer-emboss-box-shadow: $v-emboss-outer-box-shadow;
+} @else if $v-emboss-inner-box-shadow != none and $v-emboss-outer-box-shadow != none {
+  $_veneer-emboss-box-shadow: $v-emboss-inner-box-shadow, $v-emboss-outer-box-shadow;
+}
+
+$v-emboss-box-shadow: $_veneer-emboss-box-shadow !default;
+
+$v-overlay-box-shadow: $_veneer-overlay-box-shadow !default;
+$v-textfield-box-shadow: $_veneer-input-box-shadow !default;
+$v-overlay-window-box-shadow: $_veneer-overlay-window-box-shadow !default;
+
+
+
+
+$v-disabled-opacity: 0.3 !default;
+
+$v-disabled-field-opacity: null !default;
+$v-disabled-field-bg-color: null !default;
+$v-disabled-field-border-color: null !default;
+$v-disabled-field-font-color: null !default;
+
+$v-readonly-field-bg-color: null !default;
+$v-readonly-field-border-color: null !default;
+$v-readonly-field-font-color: null !default;
+
+

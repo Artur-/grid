@@ -1,14 +1,16 @@
 package org.vaadin.artur.grid;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import org.vaadin.artur.grid.data.Address;
 import org.vaadin.artur.grid.data.Country;
 import org.vaadin.artur.grid.data.Person;
 
 import com.vaadin.data.fieldgroup.DefaultFieldGroupFieldFactory;
 import com.vaadin.data.fieldgroup.FieldGroup;
-import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.data.util.BeanItemContainer;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.AbstractSelect;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -65,7 +67,7 @@ public class AddressbookEditor extends CustomComponent {
 
 		grid = new PersonGrid();
 		grid.setWidth("100%");
-		grid.setHeight("350px");
+		grid.setHeight("370px");
 
 		layout.setWidth("100%");
 		layout.setSpacing(true);
@@ -79,6 +81,7 @@ public class AddressbookEditor extends CustomComponent {
 		tableActions.setSpacing(true);
 		tableActions.addComponent(editButton);
 		tableActions.addComponent(deleteButton);
+		deleteButton.addStyleName("danger");
 		tableActions.addComponent(newButton);
 		layout.setComponentAlignment(tableActions, Alignment.MIDDLE_RIGHT);
 
@@ -86,16 +89,36 @@ public class AddressbookEditor extends CustomComponent {
 		salary.setNullRepresentation("");
 
 		form.setWidth("100%");
+		
 		form.addComponent(firstName);
+		firstName.setInputPrompt("Jane");
+		
 		form.addComponent(birthDate);
+		DateFormat formatter = DateFormat.getDateInstance(DateFormat.SHORT, VaadinSession.getCurrent().getLocale());
+		String localPattern  = ((SimpleDateFormat)formatter).toLocalizedPattern();
+		birthDate.setInputPrompt(localPattern);
+		
 		form.addComponent(lastName);
+		lastName.setInputPrompt("Doe");
+		
 		form.addComponent(salary);
+		salary.setInputPrompt("100,000");
+		
 		form.addComponent(address);
+		address.setInputPrompt("Street Name 2");
+		
 		form.space();
+		
 		form.addComponent(city);
+		city.setInputPrompt("San Francisco");
+		
 		form.space();
+		
 		form.addComponent(country);
+		country.setInputPrompt("U.S.");
+		
 		form.setSpacing(true);
+		form.setMargin(true);
 
 		firstName.setWidth("60%");
 		lastName.setWidth("60%");
@@ -105,6 +128,7 @@ public class AddressbookEditor extends CustomComponent {
 
 		formActions.setSpacing(true);
 		formActions.addComponent(saveButton);
+		saveButton.addStyleName("primary");
 		formActions.addComponent(cancelButton);
 		layout.setComponentAlignment(formActions, Alignment.MIDDLE_RIGHT);
 	}
@@ -174,34 +198,6 @@ public class AddressbookEditor extends CustomComponent {
 
 		// formActions.setEnabled(false);
 		// form.setEnabled(false);
-
-		saveButton.addClickListener(new Button.ClickListener() {
-			public void buttonClick(ClickEvent event) {
-				try {
-					fields.commit();
-					// @SuppressWarnings("unchecked")
-					// Person p = ((BeanItem<Person>)
-					// fields.getItemDataSource())
-					// .getBean();
-					// grid.getContainerDatasource().
-					// service.storeAddress(a);
-					BeanItem<Person> item = (BeanItem<Person>) fields
-							.getItemDataSource();
-					if (!grid.getContainerDatasource().containsId(item)) {
-						((BeanItemContainer<Person>) grid
-								.getContainerDatasource()).addBean(item
-								.getBean());
-					}
-					updateGrid();
-					// fields.
-					// grid.select(a);
-					// grid.setCurrentPageFirstItemId(a);
-				} catch (CommitException ignored) {
-				}
-				updateActionVisibility(false);
-				fields.setItemDataSource(null);
-			}
-		});
 
 		cancelButton.addClickListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {

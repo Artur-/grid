@@ -1,0 +1,19 @@
+@mixin vaadin-veneer-menubar-bundle {
+  
+  .v-menubar-popup {
+    @extend %tune-selection-popup;
+    
+    .v-menubar-menuitem {
+      @extend %tune-selection;
+    }
+    
+    .v-menubar-menuitem-selected {
+      @extend %tune-selection-selected;
+    }
+  }
+  
+  .v-menubar-submenu:focus {
+  	outline: none;
+  }
+
+}

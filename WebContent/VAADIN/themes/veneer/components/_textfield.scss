@@ -1,0 +1,80 @@
+@mixin v-veneer-textfield-style {
+  @include appearance(none);
+  font: inherit;
+  background-color: $v-textfield-background-color;
+  color: inherit;
+  height: $v-unit-size;
+  padding: 0 $v-textfield-padding-width;
+  border: $v-textfield-border;
+  margin: 0;
+  border-radius: $v-border-radius;
+  box-shadow: $v-textfield-box-shadow;
+  
+  @if $v-enable-animations {
+    @include transition(border-color 100ms linear, box-shadow 100ms linear);
+  }
+}
+
+@mixin v-veneer-textfield-focus-style {
+  // TODO try to come up with a generic solution to appending additional styles
+  //@include vaadin-veneer-focus-styles;
+  outline: none;
+  border-color: $v-focus-border-color;
+  @if $v-textfield-box-shadow and $v-textfield-box-shadow != none {
+    box-shadow: $v-focus-box-shadow, $v-textfield-box-shadow;
+  } @else {
+    box-shadow: $v-focus-box-shadow;
+  }
+}
+
+@mixin v-veneer-textfield-prompt-style {
+  color: $v-textfield-prompt-font-color;
+  font-style: $v-textfield-prompt-font-style;
+}
+
+@mixin v-veneer-textfield-disabled-style {
+  @extend %no-selection;
+  @include v-veneer-disabled-field-style;
+}
+
+
+
+
+%v-veneer-textfield-style {
+  @include v-veneer-textfield-style;
+}
+
+%v-veneer-textfield-focus-style {
+  @include v-veneer-textfield-focus-style;
+}
+
+%v-veneer-textfield-prompt-style {
+  @include v-veneer-textfield-prompt-style;
+}
+
+%v-veneer-textfield-disabled-style {
+  @include v-veneer-textfield-disabled-style;
+}
+
+
+
+
+@mixin v-veneer-textfield ($primary-stylename: v-textfield) {
+  
+  .#{$primary-stylename} {
+    @extend %v-veneer-textfield-style;
+  }
+  
+  .#{$primary-stylename}:focus {
+    @extend %v-veneer-textfield-focus-style;
+  }
+  
+  .#{$primary-stylename}-prompt {
+    @extend %v-veneer-textfield-prompt-style;
+  }
+  
+  .#{$primary-stylename}[disabled] {
+    @extend %v-veneer-textfield-disabled-style;
+  }
+  
+}

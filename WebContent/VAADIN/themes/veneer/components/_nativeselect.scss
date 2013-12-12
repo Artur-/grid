@@ -1,0 +1,114 @@
+@mixin vaadin-veneer-nativeselect-bundle {
+  
+  .v-select {
+    position: relative;
+    
+    &:before {
+      @include arrow(bottom, inherit, $vaadin-scale/5);
+      position: absolute;
+      z-index: 1;
+      
+      //$_margin-top: $vaadin-scale/2 - $vaadin-scale/10 + $vaadin-tune-border-width/$vaadin-font-size;
+      //@if $vaadin-emboss-style == sharp and $vaadin-emboss-depth > 0 {
+      //  $_margin-top: $_margin-top - 0.08;
+      //}
+      
+      //margin-top: $_margin-top + em;
+      $_right: 1;
+      //@if $vaadin-tune-border-radius and $vaadin-tune-border-radius > 0 {
+      //  $_right: $_right + tune-value-to-scale($vaadin-tune-border-radius)/6;
+      //}
+      right: $_right + em;
+      content: "";
+      pointer-events: none;
+    }
+  }
+  
+  .v-select-select {
+    @include appearance(none);
+  	@extend %tune-button;
+    
+    &:-moz-focusring {
+      color: transparent;
+    }
+    
+    // Override browser default in case of no border-radius
+    @if type-of($vaadin-border-radius) != number or $vaadin-border-radius == 0 {
+      border-radius: 0;
+    }
+    
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: $vaadin-scale + $vaadin-scale/10;
+    font: inherit;
+    line-height: $vaadin-scale;
+    color: inherit;
+  
+    //@if ($vaadin-tune-emboss-style == sharp and $vaadin-tune-emboss-depth > 0) {
+    //  line-height: ($vaadin-scale - 0.2) + em;
+    //}
+  }
+  
+  .v-select-select:focus {
+    @extend %vaadin-tune-focus-styles;
+  }
+  
+  // Firefox is a bit nitpicky
+  .v-ff & .v-select-select {
+  	// Hide the default dropdown arror
+    text-indent: 0.01em;
+    text-overflow: '';
+    // Vertically center text inside the select
+    padding: .35em $vaadin-scale/2 0 .8em;
+  }
+  
+  // ...and so is IE (like you didn't know already)
+  .v-ie & .v-select-select {
+    padding: .25em $vaadin-scale/2.4;
+  }
+  
+  .v-ie & .v-select:before {
+    display: none;
+  }
+  
+  
+  .v-select.v-disabled {
+    & > .v-select-select {
+      @extend %tune-button-disabled;
+    }
+    &:before {
+      border-top-color: tune-text-color-disabled($vaadin-ui-color); 
+    }
+  }
+}
+
+
+
+
+@mixin tune-nativeselect-variant (
+    $scale: null,
+    $bg-color: null
+  ) {
+  
+  @if $scale {
+  	font-size: $scale * $vaadin-font-size;
+    & > .v-select-select {
+      @include tune-button-variant($scale: $scale, $hover: false, $active: false);
+      line-height: $scale * $vaadin-scale;
+    }
+  }
+  
+  @if $bg-color {
+  	color: tune-text-color($bg-color);
+    & > .v-select-select {
+      @include tune-button-variant($bg-color: $bg-color, $hover: false, $active: false);
+      
+      &:-moz-focusring {
+      color: transparent;
+      text-shadow: 0 0 0 tune-text-color($bg-color);
+    }
+    }
+  }
+	
+	
+}

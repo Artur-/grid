@@ -1,0 +1,74 @@
+@mixin vaadin-veneer-notifications-bundle {
+  $_bg-color: #444;
+  
+  .v-Notification {
+  	@if $v-enable-animations {
+      //@include vaadin-primer-anim-fade-in;
+    }
+    
+    background: transparentize($_bg-color, .05);
+    color: #fff;
+    padding: $v-unit-size/2 $v-unit-size;
+    
+    border-radius: $v-border-radius;
+    
+    h1 {
+      color: #fff;
+      font-size: 1.5em;
+      font-weight: 300;
+      margin: 0;
+      display: inline;
+    }
+    
+    p {
+      margin: 0;
+      display: inline;
+    }
+    
+    h1 + p {
+      margin-left: 1em;
+    }
+  }
+  
+  .v-Notification-system {
+    left: 0 !important;
+    right: 0;
+    cursor: pointer;
+    
+    @if $v-enable-animations {
+      //@include vaadin-primer-anim-roll-down;
+    }
+    
+    @if $v-border-radius {
+      border-radius: 0;
+    }
+    
+    &:hover {
+      @include opacity(1, true);
+    }
+  }
+  
+  .v-Notification-tray {
+  	cursor: pointer;
+    
+    h1 {
+      display: block;
+      font-size: 1.3em;
+    }
+    
+    h1 + p {
+      display: block;
+      margin: .1em 0 0;
+    }
+    
+    @if $v-border-radius > 0 {
+      margin: $v-border-radius;
+    }
+    
+    &:hover {
+      background: $_bg-color;
+      box-shadow: 0 0 10px transparentize(#000, (100% - $v-emboss-depth)/100%);
+    }
+  }
+  
+}
