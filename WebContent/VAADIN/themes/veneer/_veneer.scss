@@ -1,0 +1,45 @@
+// Building on top of the Core theme
+@import "../core/core";
+
+
+// Import theme specific variables
+// These can't affect any variables defined in the Core theme
+@import "shared/veneer-variables";
+
+
+// Import utility & shared functions and mixins
+@import "util/util";
+@import "shared/fonts";
+@import "shared/icons";
+@import "shared/common";
+
+
+// Import all component mixins
+@import "components/all";
+
+
+
+
+
+// Theme's main mixin
+@mixin v-veneer {
+  @include v-veneer-global;
+  @include v-veneer-components;
+  @content;
+  
+  // TODO Enable once Sass 3.3 is released (and the Vaadin Sass compiler also supports this)
+  //@at-root {
+    //@include v-primer-icons-fontface;
+    //@include v-veneer-icons-fontface;
+    
+    //@if contains($v-font-family, "Source Sans Pro") {
+    //  @include font-source-sans-pro;
+    //}
+    
+    //@if contains($v-font-family, "Open Sans") {
+    //  @include font-open-sans;
+    //}
+  //}
+  
+  
+}

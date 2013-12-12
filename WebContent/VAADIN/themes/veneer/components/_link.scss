@@ -1,0 +1,26 @@
+%vaadin-veneer-link {
+  cursor: pointer;
+  color: $vaadin-link-color;
+  
+  &:hover {
+    color: lighten(link-color($vaadin-ui-color), 10%);
+  }
+  
+}
+
+
+@mixin vaadin-veneer-link-bundle {
+  .v-link {
+    @extend %vaadin-veneer-link;
+    
+    & > a {
+      color: inherit;
+      text-decoration: none;
+      
+      &:focus {
+        outline: none;
+        @extend %vaadin-focus-styles;
+      }
+    }
+  }
+}

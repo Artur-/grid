@@ -1,0 +1,5 @@
+@import "icons/veneer-icons/veneer-icons";
+
+@mixin vaadin-veneer-icons {
+  @include v-veneer-icons-fontface;
+}

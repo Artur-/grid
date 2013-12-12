@@ -1,0 +1,72 @@
+// Map of icon names to character codes
+@import "veneer-icons-character-mapping";
+
+
+
+// Internal variable, used to determine whether to output the @font-face declaration for this font icon
+$_include-v-veneer-icons-fontface: false !default;
+
+
+
+// Mixin for including named icons
+// 
+// Parameters:
+//   $icon-name: the predefined icon name. See icon font documentation for possible values
+//   $content-only: if true, include only the necessary font-family and the character code in the content property. If false (default), output the ::before speudo element selector with necessary properties.
+@mixin v-veneer-icon($icon-name, $content-only: false) {
+
+  $_include-v-veneer-icons-fontface: true;
+  
+  $_char: "";
+  
+  @each $icon in $v-veneer-icons-map {
+    @if nth($icon, 1) == $icon-name {
+      $_char: nth($icon, 2);
+    }
+  }
+  
+  @if $content-only {
+  	speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-transform: none;
+    font-family: v-veneer-icons;
+    content: $_char;
+    @content;
+  } @else {
+    &:before {
+      speak: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-transform: none;
+      font-family: v-veneer-icons;
+      content: $_char;
+      @content;
+    }
+  }
+}
+
+
+@mixin v-veneer-icons-fontface {
+
+  @if $_include-v-veneer-icons-fontface {
+  
+    @font-face {
+      $veneer-icons-pathPrefix: null;
+      @if $relativePaths == false {
+        $veneer-icons-pathPrefix: "../veneer/shared/icons/veneer-icons/";
+      }
+      
+      font-family: "v-veneer-icons";
+      src:url('#{$veneer-icons-pathPrefix}veneer-icons.eot');
+      src:url('#{$veneer-icons-pathPrefix}veneer-icons.eot?#iefix') format('embedded-opentype'),
+          url('#{$veneer-icons-pathPrefix}veneer-icons.ttf') format('truetype'),
+          url('#{$veneer-icons-pathPrefix}veneer-icons.woff') format('woff'),
+          url('#{$veneer-icons-pathPrefix}veneer-icons.svg#veneer-icons') format('svg');
+      font-weight: normal;
+      font-style: normal;
+    }
+    
+  }
+  
+}

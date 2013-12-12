@@ -19,7 +19,7 @@ public class PersonGrid extends Grid {
 		name.setHeaderCaption("Full name");
 
 		ColumnGroup address = headerGroup.addGroup("address.city",
-				"address.country", "address.streetName");
+				"address.country", "address._streetName");
 
 		address.setHeaderCaption("Address");
 
@@ -36,8 +36,17 @@ public class PersonGrid extends Grid {
 		footer2.addGroup("salary").setFooterCaption("Max: " + getMaxSalary());
 		setColumnFootersVisible(true);
 
-		getColumn("address.streetName").setWidth(200);
+		getColumn("address._streetName").setWidth(200);
 		setLastFrozenPropertyId("_employeeId");
+		
+		
+		getColumn("birthDate").setHeaderCaption("Birth date");
+		getColumn("firstName").setHeaderCaption("First");
+		getColumn("lastName").setHeaderCaption("Last");
+		getColumn("salary").setHeaderCaption("Salary (€)");
+		getColumn("address.city").setHeaderCaption("City");
+		getColumn("address.country").setHeaderCaption("Country");
+		getColumn("address._streetName").setHeaderCaption("Street");
 	}
 
 	private double getAverageSalary() {

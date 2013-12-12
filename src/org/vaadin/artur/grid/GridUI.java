@@ -10,17 +10,12 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 
 @SuppressWarnings("serial")
-@Theme("grid")
+@Theme("grid-demo")
 public class GridUI extends UI {
 
 	@WebServlet(value = "/*", asyncSupported = true)
 	@VaadinServletConfiguration(productionMode = false, ui = GridUI.class)
 	public static class Servlet extends VaadinServlet {
-
-		@Override
-		protected void servletInitialized() throws ServletException {
-			super.servletInitialized();
-		}
 	}
 
 	@Override

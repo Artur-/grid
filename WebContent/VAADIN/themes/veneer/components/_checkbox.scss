@@ -1,0 +1,68 @@
+@mixin vaadin-veneer-checkbox-bundle {
+  
+  .v-checkbox {
+  	
+  	position: relative;
+    line-height: $vaadin-scale/2;
+    
+    :root & > input {
+      position: absolute;
+      clip: rect(0,0,0,0);
+      left: .2em;
+      top: .2em;
+      z-index: 0;
+      margin: 0;
+      
+      &:focus ~ label:before {
+        @extend %vaadin-focus-styles;
+      }
+      
+      &:checked ~ label:after {
+      	display: inline-block;
+        width: $vaadin-scale/2;
+        margin-top: nth($vaadin-ui-border, 1);
+        text-align: center;
+        @include vaadin-veneer-icon($icon-name: checkmark, $content-only: true);
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        color: $vaadin-primary-color;
+      }
+    }
+    
+    & > label:before {
+      content: "";
+      @extend %tune-button;
+      display: inline-block;
+      @include box-sizing(border-box);
+      padding: 0;
+      width: $vaadin-scale/2;
+      height: $vaadin-scale/2;
+      vertical-align: -.25em;
+      margin-right: .5em;
+      position: relative;
+      z-index: 1;
+      
+      // Don't over-do border-radius, restrict to maximum of 1/3th of the height of the checkbox
+      //@if $vaadin-tune-border-radius and $vaadin-tune-border-radius > 0 {
+      //  $_default: tune-value-to-scale($vaadin-tune-border-radius);
+      //  $_max: $vaadin-scale/6;
+      //  @if $_default > $_max {
+          border-radius: $vaadin-border-radius;
+      //  } 
+      //}
+    }
+    
+    & > .v-icon  {
+      margin: 0 .3em 0 $vaadin-scale/2 + 0.5;
+      vertical-align: -.2em;
+      
+      & + label:before {
+        position: absolute;
+        left: 0;
+      }
+    }
+    
+  }
+  
+}

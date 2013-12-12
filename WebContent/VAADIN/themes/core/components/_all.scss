@@ -1,0 +1,199 @@
+@import "absolutelayout";
+@import "accordion";
+@import "button";
+@import "calendar";
+@import "checkbox";
+@import "colorpicker";
+@import "combobox";
+@import "csslayout";
+@import "customcomponent";
+@import "customlayout";
+@import "datefield";
+@import "dragwrapper";
+@import "form";
+@import "formlayout";
+@import "grid";
+@import "gridlayout";
+@import "label";
+@import "link";
+@import "loginform";
+@import "menubar";
+@import "nativebutton";
+@import "nativeselect";
+@import "optiongroup";
+@import "orderedlayout";
+@import "panel";
+@import "popupview";
+@import "progressindicator";
+@import "slider";
+@import "splitpanel";
+@import "table";
+@import "tabsheet";
+@import "textfield";
+@import "textarea";
+@import "tree";
+@import "treetable";
+@import "twincolselect";
+@import "upload";
+@import "widget";
+@import "window";
+
+
+
+@mixin v-core-components {
+  
+  @if include-vaadin-component(absolutelayout) {
+    @include vaadin-core-absolutelayout-bundle;
+  }
+  
+  //@if include-vaadin-component(accordion) {
+  //  @include vaadin-core-accordion;
+  //}
+  
+  // Not included on it's own, the extending theme should use the mixin
+  //@if include-vaadin-component(button) {
+  //  .v-button {
+  //    @include vaadin-core-button;
+  //  }
+  //}
+  
+  //@if include-vaadin-component(calendar) {
+  //  @include vaadin-core-calendar;
+  //}
+  
+  //@if include-vaadin-component(checkbox) or include-vaadin-component(optiongroup) {
+  //  @include vaadin-core-checkbox;
+  //}
+  
+  @if include-vaadin-component(colorpicker) {
+    @include vaadin-core-colorpicker-bundle;
+  }
+  
+  //@if include-vaadin-component(combobox) {
+  //  @include vaadin-core-combobox;
+  //}
+  
+  @if include-vaadin-component(csslayout) {
+    @include vaadin-core-csslayout-bundle;
+  }
+  
+  @if include-vaadin-component(customcomponent) {
+    @include vaadin-core-customcomponent-bundle;
+  }
+  
+  @if include-vaadin-component(customlayout) {
+    @include vaadin-core-customlayout-bundle;
+  }
+  
+  //@if include-vaadin-component(datefield) {
+  //  @include vaadin-core-datefield;
+  //}
+  
+  //@if include-vaadin-component(dragwrapper) {
+  //  @include vaadin-core-dragwrapper;
+  //}
+  
+  @if include-vaadin-component(form) {
+    @include vaadin-core-form-bundle;
+  }
+  
+  @if include-vaadin-component(formlayout) {
+    @include vaadin-core-formlayout;
+  }
+  
+  @if include-vaadin-component(grid) {
+    @include v-core-grid(v-escalator);
+  }
+  
+  @if include-vaadin-component(gridlayout) {
+    @include vaadin-core-gridlayout;
+  }
+  
+  @if include-vaadin-component(label) {
+    @include vaadin-core-label;
+  }
+  
+  @if include-vaadin-component(link) {
+    @include vaadin-core-link;
+  }
+  
+  @if include-vaadin-component(loginform) {
+    @include vaadin-core-loginform;
+  }
+  
+  @if include-vaadin-component(menubar) {
+    @include vaadin-core-menubar;
+  }
+  
+  @if include-vaadin-component(nativebutton) {
+    @include vaadin-core-nativebutton;
+  }
+  
+  @if include-vaadin-component(nativeselect) {
+    @include vaadin-core-nativeselect;
+  }
+  
+  @if include-vaadin-component(optiongroup) {
+    @include vaadin-core-optiongroup;
+  }
+  
+  @if include-vaadin-component(orderedlayout) {
+    @include vaadin-core-orderedlayout;
+  }
+  
+  @if include-vaadin-component(panel) {
+    @include vaadin-core-panel;
+  }
+  
+  @if include-vaadin-component(popupview) {
+    @include vaadin-core-popupview;
+  }
+  
+  @if include-vaadin-component(progressindicator) {
+    @include vaadin-core-progressindicator;
+  }
+  
+  @if include-vaadin-component(slider) {
+    @include vaadin-core-slider;
+  }
+  
+  @if include-vaadin-component(splitpanel) {
+    @include vaadin-core-splitpanel;
+  }
+  
+  @if include-vaadin-component(table) {
+    @include vaadin-core-table;
+  }
+  
+  @if include-vaadin-component(tabsheet) {
+    @include vaadin-core-tabsheet;
+  }
+  
+  @if include-vaadin-component(textfield) {
+    @include vaadin-core-textfield;
+  }
+  
+  @if include-vaadin-component(textarea) {
+    @include vaadin-core-textarea;
+  }
+  
+  @if include-vaadin-component(tree) {
+    @include vaadin-core-tree;
+  }
+  
+  @if include-vaadin-component(treetable) {
+    @include vaadin-core-treetable;
+  }
+  
+  @if include-vaadin-component(twincolselect) {
+    @include vaadin-core-twincolselect;
+  }
+  
+  @if include-vaadin-component(upload) {
+    @include vaadin-core-upload;
+  }
+  
+  @if include-vaadin-component(window) {
+    @include vaadin-core-window;
+  }
+}

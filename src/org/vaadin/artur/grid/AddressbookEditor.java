@@ -1,5 +1,8 @@
 package org.vaadin.artur.grid;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import org.vaadin.artur.grid.data.Address;
 import org.vaadin.artur.grid.data.Country;
 import org.vaadin.artur.grid.data.Person;
@@ -19,6 +22,7 @@ import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
@@ -65,11 +69,13 @@ public class AddressbookEditor extends CustomComponent {
 
 		grid = new PersonGrid();
 		grid.setWidth("100%");
-		grid.setHeight("350px");
+		grid.setHeight("250px");
 
 		layout.setWidth("100%");
 		layout.setSpacing(true);
 		layout.setMargin(true);
+
+		deleteButton.addStyleName("danger");
 
 		layout.addComponent(grid);
 		layout.addComponent(tableActions);
@@ -96,12 +102,28 @@ public class AddressbookEditor extends CustomComponent {
 		form.space();
 		form.addComponent(country);
 		form.setSpacing(true);
+		form.setMargin(true);
+
+		DateFormat formatter = DateFormat.getDateInstance(DateFormat.SHORT, UI
+				.getCurrent().getLocale());
+		String localPattern = ((SimpleDateFormat) formatter)
+				.toLocalizedPattern();
+		birthDate.setInputPrompt(localPattern);
+
+		firstName.setInputPrompt("Jane");
+		lastName.setInputPrompt("Doe");
+		salary.setInputPrompt("100,000");
+		address.setInputPrompt("Street Name 2");
+		city.setInputPrompt("San Francisco");
+		country.setInputPrompt("U.S.");
 
 		firstName.setWidth("60%");
 		lastName.setWidth("60%");
 		address.setWidth("100%");
 		// phoneNumber.setWidth("50%");
 		// emailAddress.setWidth("70%");
+
+		saveButton.addStyleName("primary");
 
 		formActions.setSpacing(true);
 		formActions.addComponent(saveButton);
@@ -157,10 +179,10 @@ public class AddressbookEditor extends CustomComponent {
 		// editButton.setEnabled(selected);
 		// deleteButton.setEnabled(selected);
 
-//		grid.setEnabled(!editingPerson);
-//		tableActions.setEnabled(!editingPerson);
-//		formActions.setEnabled(editingPerson);
-//		form.setEnabled(editingPerson);
+		// grid.setEnabled(!editingPerson);
+		// tableActions.setEnabled(!editingPerson);
+		// formActions.setEnabled(editingPerson);
+		// form.setEnabled(editingPerson);
 	}
 
 	private void initForm() {
@@ -169,7 +191,7 @@ public class AddressbookEditor extends CustomComponent {
 		fields.bind(salary, "salary");
 		fields.bind(birthDate, "birthDate");
 		fields.bind(city, "address.city");
-		fields.bind(address, "address.streetName");
+		fields.bind(address, "address._streetName");
 		fields.bind(country, "address.country");
 
 		// formActions.setEnabled(false);
@@ -193,7 +215,8 @@ public class AddressbookEditor extends CustomComponent {
 								.getBean());
 					}
 					updateGrid();
-					// fields.
+					clearFields();
+					// fields.clear();
 					// grid.select(a);
 					// grid.setCurrentPageFirstItemId(a);
 				} catch (CommitException ignored) {
@@ -208,8 +231,20 @@ public class AddressbookEditor extends CustomComponent {
 				fields.discard();
 				updateActionVisibility(false);
 				fields.setItemDataSource(null);
+				clearFields();
 			}
 		});
+	}
+
+	protected void clearFields() {
+		firstName.setValue("");
+		lastName.setValue("");
+		address.setValue("");
+		birthDate.setValue(null);
+		salary.setValue(null);
+		city.setValue("");
+		country.setValue(null);
+
 	}
 
 	private void editPerson(Person p) {

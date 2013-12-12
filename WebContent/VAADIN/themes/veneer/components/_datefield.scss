@@ -1,0 +1,346 @@
+@mixin v-veneer-datefield-button-style {
+  @include appearance(none);
+  @extend %v-widget;
+  width: $v-unit-size;
+  height: $v-unit-size;
+  position: absolute !important;
+  right: 0;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  
+  @if $v-button-font-color {
+    color: $v-button-font-color;
+  } @else {
+    color: inherit;
+  }
+  
+  @include v-veneer-icon(calendar) {
+    font-size: ceil($v-unit-size/2);
+    line-height: 1;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    margin-top: -(ceil($v-unit-size/4));
+    width: $v-unit-size;
+  }
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+@mixin v-veneer-datefield-button-disabled-style {
+  cursor: default;
+}
+
+
+
+
+
+@mixin v-veneer-datefield ($primary-stylename: v-datefield) {
+  
+  .#{$primary-stylename} {
+    position: relative;
+  }
+  
+  .#{$primary-stylename}-textfield {
+  	@extend %v-widget;
+    padding-right: $v-unit-size;
+  }
+  
+  .#{$primary-stylename}-prompt .#{$primary-stylename}-textfield {
+    @extend %v-veneer-textfield-prompt-style;
+  }
+  
+  .#{$primary-stylename}-button {
+  	@include v-veneer-datefield-button-style;
+  }
+  
+  .v-disabled > .#{$primary-stylename}-button {
+    @include v-veneer-datefield-button-disabled-style;
+  }
+  
+  .v-datefield-popup {
+    @extend %v-veneer-overlay;
+    
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+    
+    table,
+    tbody,
+    tr {
+      display: block;
+    }
+
+    td {
+      display: inline-block;
+      padding: 0;
+    }
+  }
+  
+  .v-datefield-calendarpanel {
+    &:focus {
+      outline: none;
+    }
+  }
+  
+  .v-datefield-calendarpanel-body {
+    margin: 0 -$v-widget-border-width;
+    
+    tr {
+      white-space: nowrap;
+      
+      @if $v-widget-border-width > 0 {
+        margin-bottom: -$v-widget-border-width;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+    
+    td {
+      @if $v-widget-border-width > 0 {
+        margin-right: -$v-widget-border-width;
+        
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+  
+  
+  .v-datefield-calendarpanel-day {
+  	@extend %v-veneer-button;
+  	display: inline-block;
+    @include box-sizing(border-box);
+    position: relative;
+    width: $v-unit-size;
+    height: $v-unit-size;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+    
+    @include v-veneer-gradient($v-widget-color, $depth: ceil($v-gradient-depth/2));
+    
+    @if $v-widget-border-width == 0px and $v-border-radius {
+      border-radius: $v-border-radius;
+    } @else {
+      border-radius: 0;
+    }
+    
+    @include v-veneer-button-states;
+    
+    @if $v-emboss-style and $v-emboss-depth > 0 {
+      text-shadow: v-veneer-emboss-text-shadow();
+    }
+  }
+    
+  .v-datefield-calendarpanel-day-offmonth {
+  	color: text-color-disabled($v-widget-color);
+  }
+  
+  .v-datefield-calendarpanel-day-today {
+  	position: relative;
+    &:before {
+      position: absolute;
+      bottom: $v-unit-size/8;
+      left: 50%;
+      margin-left: -$v-unit-size/16;
+      content: "";
+      display: block;
+      width: $v-unit-size/8;
+      height: $v-unit-size/8;
+      border-radius: 50%;
+      background: $v-primary-color;
+    }
+  }
+  
+  .v-datefield-calendarpanel-day.v-datefield-calendarpanel-day-selected {
+    @include v-veneer-gradient($v-primary-color);
+  	color: text-color($v-primary-color);
+  	&:before {
+      background: text-color($v-primary-color);
+  	}
+  	@if $v-emboss-style and $v-emboss-depth > 0 {
+      box-shadow: v-veneer-emboss-inner-box-shadow($bg-color: $v-primary-color);
+      text-shadow: v-veneer-emboss-text-shadow($bg-color: $v-primary-color);
+    }
+  }
+  
+  .v-datefield-calendarpanel-day.v-datefield-calendarpanel-day-focused {
+  	@include v-veneer-focus-style;
+  	position: relative;
+  	z-index: 1;
+  	font-weight: 600;
+  	color: $v-primary-color;
+  	&.v-datefield-calendarpanel-day-selected {
+      color: text-color($v-primary-color);
+  	}
+  }
+  
+  .v-datefield-calendarpanel-header {
+    height: $v-unit-size;
+    line-height: $v-unit-size;
+    padding-bottom: $v-unit-size/1.5;
+    margin-bottom: -$v-unit-size/1.5;
+    display: block;
+        
+    @include v-veneer-gradient($v-widget-color);
+    white-space: nowrap;
+    
+    td {
+      display: inline-block;
+    }
+    
+    @if $v-emboss-style and $v-emboss-depth > 0 {
+      text-shadow: v-veneer-emboss-text-shadow($bg-color: $v-app-background-color);
+    }
+      
+    @if $v-border-radius {
+      border-radius: $v-border-radius $v-border-radius 0 0;
+    }
+  }
+  
+  .v-datefield-month,
+  .v-datefield-year {
+  	.v-datefield-calendarpanel-header {
+      padding-bottom: 0;
+      margin-bottom: 0;
+      @if $v-border-radius {
+        border-radius: $v-border-radius;
+      }
+  	}
+  }
+  
+  .v-datefield-calendarpanel-weekdays {
+      height: $v-unit-size/1.5;
+    
+    @if $v-widget-border-width > 0 {
+      margin-left: -$v-widget-border-width;
+    }
+    
+    line-height: $v-unit-size/1.5;
+    color: text-color-light($v-app-background-color);
+    
+    td {
+      text-align: center;
+      width: $v-unit-size;
+    }
+    
+    strong {
+      font-weight: 300;
+      font-size: .8em;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  }
+  
+  .v-datefield-calendarpanel-prevyear,
+  .v-datefield-calendarpanel-prevmonth,
+  .v-datefield-calendarpanel-nextyear,
+  .v-datefield-calendarpanel-nextmonth {
+    position: absolute;
+    top: 0;
+    width: $v-unit-size/1.2;
+    height: $v-unit-size;
+    
+    button {
+      @include appearance(none);
+      border: none;
+      background: transparent;
+      font: inherit;
+      text-shadow: inherit;
+      color: inherit;
+      font-size: 1.8em;
+      line-height: 1;
+      height: $v-unit-size/1.8;
+      width: $v-unit-size/1.8/1.2;
+      padding: 0;
+      margin: -.1em 0 0;
+      cursor: pointer;
+      
+      &:hover {
+        text-shadow: 0 0 .25em $v-focus-border-color;
+      }
+    }
+  }
+  
+  .v-datefield-calendarpanel-prevyear {
+    left: 0;
+  }
+  
+  .v-datefield-calendarpanel-prevmonth {
+    left: $v-unit-size/1.2;
+  }
+  
+  .v-datefield-calendarpanel-nextyear {
+    right: 0;
+  }
+  
+  .v-datefield-calendarpanel-nextmonth {
+    right: $v-unit-size/1.2;
+  }
+  
+  .v-datefield-popup td.v-datefield-calendarpanel-month {
+    width: 100%;
+    text-align: center;
+    //border-top: $v-unit-size/8 solid $v-primary-color;
+    @if $v-border-radius {
+      border-radius: $v-border-radius $v-border-radius 0 0;
+    }
+    
+    & > span {
+      font-size: 1.1em;
+    }
+  }
+  
+  .v-datefield-year td.v-datefield-calendarpanel-month {
+  	width: (4 + 2*$v-unit-size/1.2);
+  }
+  
+  .v-datefield-month td.v-datefield-calendarpanel-month {
+  	width: (9 + 4*$v-unit-size/1.2);
+  }
+  
+  .v-datefield-calendarpanel-weeknumber,
+  .v-datefield-calendarpanel-weekdays.v-datefield-calendarpanel-weeknumbers td:first-child {
+  	display: inline-block;
+    width: $v-unit-size;
+    color: text-color-light($v-widget-color);
+    text-align: center;
+    font-size: 0.8em;
+  }
+
+  td.v-datefield-calendarpanel-time {
+  	width: 100%;
+  	text-align: center;
+    padding: $v-unit-size/4 0;
+    
+    .v-label {
+      display: inline-block;
+      padding: 0 .3em;
+      font-weight: 400;
+    }
+    
+    .v-select {
+      //@extend .v-select-select;
+    }
+    
+    .v-select.v-select {
+      padding: .3em .55em;
+      line-height: 1;
+      height: auto;
+    }
+    
+    .v-ff & .v-select.v-select {
+      padding:  .15em 0 .15em .2em;
+    }
+  }
+}

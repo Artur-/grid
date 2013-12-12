@@ -1,0 +1,163 @@
+@mixin v-veneer-button-style (
+  $background-color: null,
+  $border-width: null,
+  $border-style: null,
+  $border-color: null,
+  $border-radius: null,
+  $unit-size: null,
+  $font-size: null,
+  $color: null,
+  $emboss-depth: null,
+  $gradient-depth: null
+  ) {
+  
+  @include v-core-button-style;
+  
+  cursor: pointer;
+  
+  // Always outputs a solid color as well
+  @include v-veneer-gradient($background-color);
+  
+  border: $border-width $border-style $border-color;
+  border-radius: $border-radius;
+  
+  @if $v-button-padding-width {
+    padding: 0 $v-button-padding-width;
+  } @else {
+    padding: 0;
+  }
+  
+  height: $unit-size;
+  line-height: $unit-size - $border-width*2;
+  font-size: $font-size;
+  
+  @debug $color;
+  @if $color {
+    color: $color;
+  } @else {
+    color: text-color($background-color);
+  }
+  
+  @if $emboss-depth > 0 {
+  	box-shadow: $v-emboss-box-shadow;
+  	
+    @if color-luminance($v-app-background-color) >= 110 {
+      $_top-emboss-depth: max(20%, $emboss-depth);
+      border-top-color: color-screen(#fff, $border-color, $_top-emboss-depth);
+    }
+    border-bottom-color: color-multiply(#000, $border-color, $emboss-depth/1.5);
+    text-shadow: v-veneer-emboss-text-shadow();
+  }
+  
+  @if $v-enable-animations {
+    @include transition(border-color 100ms linear, box-shadow 100ms linear);
+  }
+}
+
+
+
+
+
+@mixin v-veneer-button-states ($bg-color: $v-widget-color, $hover: $v-enable-hover-styles, $focus: true, $active: true, $enable: true, $variant-only: false) {
+  @if $hover {
+    &:hover {
+      @include v-veneer-hover-style($bg-color: $bg-color, $enable: $enable, $variant-only: $variant-only);
+    }
+  }
+  
+  @if $focus {
+    &:focus {
+      @include v-veneer-focus-style($bg-color: $bg-color, $enable: $enable);
+    }
+  }  
+  
+  @if $active {
+    &:active,
+    &.v-pressed {
+      @include v-veneer-active-style($bg-color: $bg-color, $enable: $enable, $variant-only: $variant-only);
+    }
+  }
+}
+
+
+
+
+
+
+@mixin vaadin-veneer-button-disabled-style {
+  @extend %v-veneer-disabled-field-style;
+  cursor: default;
+    
+  @include v-veneer-button-states($enable: false);
+  
+  //@if $vaadin-emboss-style and $vaadin-emboss-depth > 0 {
+  //	text-shadow: none !important;
+  //  box-shadow: $vaadin-emboss-outer-box-shadow !important;
+  //  &:focus {
+  //    box-shadow: $vaadin-emboss-outer-box-shadow !important;
+  //  }
+  //}
+}
+
+
+
+
+
+
+
+@mixin v-veneer-button ($primary-stylename: v-button) {
+  
+  %v-veneer-button,
+  .#{$primary-stylename} {
+    @include v-veneer-button-style(
+      $background-color: $v-widget-color,
+      $border-width: $v-button-border-width,
+      $border-style: solid,
+      $border-color: button-border-color($v-widget-color, $v-app-background-color),
+      $border-radius: $v-button-border-radius,
+      $unit-size: $v-unit-size,
+      $color: $v-button-font-color,
+      $emboss-depth: $v-emboss-depth,
+      $gradient-depth: $v-gradient-depth
+  	);
+    
+    @include v-veneer-button-states;
+    
+    &.v-disabled {
+      @include vaadin-veneer-button-disabled-style;
+    }
+  }
+  
+}
+
+
+
+
+@mixin v-veneer-button-variant (
+  $background-color: null, 
+  $context-bg-color: $v-app-background-color,
+  $gradient-depth: $v-gradient-depth,
+  $emboss-depth: $v-emboss-depth) {
+  
+  @if $background-color {
+    @include v-veneer-gradient($background-color, $depth: $gradient-depth);
+    color: text-color($background-color);
+    
+    $border-color: button-border-color($background-color, $context-bg-color);
+    border-color: $border-color;
+    
+    @if $v-emboss-depth > 0 {
+      box-shadow: v-veneer-emboss-box-shadow($bg-color: $background-color, $context-bg-color: $context-bg-color, $emboss-depth: $emboss-depth);
+      
+      @if color-luminance($context-bg-color) >= 110 {
+        $_top-emboss-depth: max(20%, $emboss-depth);
+        border-top-color: color-screen(#fff, $border-color, $_top-emboss-depth);
+      }
+      border-bottom-color: color-multiply(#000, $border-color, $emboss-depth/1.5);
+      text-shadow: v-veneer-emboss-text-shadow($bg-color: $background-color, $text-color: text-color($background-color), $emboss-depth: $emboss-depth);
+    }
+    
+    @include v-veneer-button-states($bg-color: $background-color)
+  }
+}
+

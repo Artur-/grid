@@ -1,0 +1,54 @@
+// The Vaadin compiler parses URL paths differently than the regular Sass compiler (i.e. Vaadin modifies relative url paths).
+// This boolean is used to flag which compiler is used, so that paths are correct for different resources.
+// false == Sass, true == Vaadin
+$relativePaths: false;
+
+
+// TODO these really shouldn't be imported as a the theme
+@import "../debug/debug";
+
+
+// Import global variable defaults
+@import "shared/core-variables";
+
+
+// Import utilities
+@import "util/lists";
+@import "util/css3";
+@import "util/bourbon/bourbon";
+
+
+// Import global style mixins
+@import "shared/core-global";
+
+
+// Import component mixins
+@import "components/all";
+
+
+// Only import and include these once per compilation
+// (someone might mix & match multiple themes together)
+
+$v-core-included: false !default;
+@if $v-core-included == false {
+  
+  // TODO these really shouldn't be included from the theme
+  @include debug-globals;
+  // TODO fix in the debug styles
+  .v-debugwindow {
+    position: fixed !important;
+  }
+
+  // Include global styles
+  @include v-core-styles;
+  
+  // Core widget styles come before any other component (and are always included),
+  // so that it has the least specificity
+  @include v-core-widget;
+  
+  // Include component styles only when necessary
+  @include v-core-components;
+  
+
+  $v-core-included: true !global;
+}

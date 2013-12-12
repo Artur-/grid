@@ -1,0 +1,149 @@
+@import "../util/util";
+
+$v-focus-box-shadow: 0 0 3px $v-primary-color !default;
+$v-focus-border-color: $v-primary-color !default;
+
+%v-veneer-focus-style {
+  outline: none;
+  border-color: $v-focus-border-color;
+  
+  @if $v-emboss-style and $v-emboss-depth > 0 {
+    box-shadow: $v-emboss-box-shadow, $v-focus-box-shadow;
+  } @else {
+    box-shadow: $v-focus-box-shadow;
+  }
+  
+  // TODO this doesn't always trickle to the top. Wait for Sass 3.3 @at-root feature
+  .v-ie8 & {
+    outline: 1px solid $v-focus-border-color;
+  }
+}
+
+@mixin v-veneer-focus-style ($bg-color: $v-widget-color, $enable: true) {
+  @if $enable {
+    @if $bg-color == $v-widget-color {
+      @extend %v-veneer-focus-style;
+    } @else {
+      outline: none;
+      $_border-color: darken($bg-color, 16%);
+      border-color: $_border-color;
+      @if $v-emboss-style and $v-emboss-depth > 0 {
+      	box-shadow: v-veneer-emboss-inner-box-shadow($bg-color: $bg-color), $v-emboss-outer-box-shadow, 0 0 3px 1px $bg-color;
+      } @else {
+        box-shadow: 0 0 3px 1px $bg-color;
+      }
+      // TODO this doesn't always trickle to the top. Wait for Sass 3.3 @at-root feature
+      // Only apply when tune-border-width == 0
+      //.v-ie & {
+      //  outline: 1px solid $_border-color;
+      //}
+    }
+  } @else {
+    box-shadow: none !important;
+    border-color: $v-border-color !important;
+  }
+}
+
+
+
+
+
+
+%v-veneer-disabled-style {
+  cursor: default;
+  
+  @if $v-disabled-opacity < 1 {
+    @include opacity($v-disabled-opacity);
+    
+    & .v-disabled {
+      @include opacity(1);
+    }
+  }
+  
+  @extend %no-selection;
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+
+
+
+
+%v-veneer-active-style {
+  position: relative;
+  outline: none;
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    @include opacity(.1);
+    @if $v-border-radius {
+      border-radius: inherit;
+    }
+  }
+}
+
+@mixin v-veneer-active-style ($bg-color: null, $enable: true, $variant-only: false) {
+  @if $enable {
+  	@if $variant-only == false {
+      @extend %v-veneer-active-style;
+  	}
+    @if $bg-color == null {
+      $bg-color: $v-primary-color;
+    }
+    &:after {
+      background-color: adjust-color($bg-color, $saturation: -50%, $lightness: -50%);
+      @include opacity(.2);
+    }
+  } @else {
+    &:after {
+      display: none;
+    }
+  }
+}
+
+
+@mixin v-veneer-hover-style ($bg-color: $v-control-background-color, $enable: true, $variant-only: false) {
+  @if $enable {
+  	@if $variant-only == false {
+      @extend %v-veneer-active-style;
+    }
+    &:after {
+      @if color-luminance($bg-color) > 170 {
+        background-color: adjust-color($v-primary-color, $lightness: 20%);
+      } @else {
+        background-color: adjust-color($bg-color, $lightness: 40%);
+      }
+    }
+  } @else {
+    &:after {
+      display: none;
+    }
+  }
+}
+
+
+
+%v-veneer-disabled-field-style {
+  @if $v-disabled-field-opacity {
+  	@include opacity($v-disabled-field-opacity, true);
+  }
+  background: $v-disabled-field-bg-color !important;
+  border-color: $v-disabled-field-border-color !important;
+  color: $v-disabled-field-font-color !important;
+}
+
+@mixin v-veneer-disabled-field-style {
+  @extend %v-veneer-disabled-field-style;
+}
+
+
+
+

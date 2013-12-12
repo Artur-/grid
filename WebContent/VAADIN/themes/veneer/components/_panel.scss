@@ -1,0 +1,52 @@
+@mixin vaadin-veneer-panel-bundle {
+  
+  .v-panel {
+    
+    
+    //@if $vaadin-tune-border-radius > 0 and tune-value-to-scale($vaadin-tune-border-radius) > $vaadin-scale/3 {
+    //  border-radius: $vaadin-scale/3 + em;
+    //} @else if $vaadin-tune-border-radius > 0 {
+      border-radius: $vaadin-border-radius;
+    //}
+  }
+  
+  .v-panel-content {
+    height: 100%;
+    
+    &:focus {
+      outline: none;
+    }
+  }
+  
+  .v-panel-caption {
+  	$_font-size: .85;
+    padding: 0 $vaadin-scale/2/$_font-size;
+    height: $vaadin-scale/$_font-size + em;
+    line-height: $vaadin-scale/$_font-size;
+    text-transform: uppercase;
+    font-size: $_font-size + em;
+    letter-spacing: 0.05em;
+    font-weight: 300;
+  }
+  
+}
+
+
+
+@mixin tune-panel-variant(
+      $header-color: null
+  ) {
+
+  @if $header-color {
+    .v-panel-caption {
+      @if $vaadin-tune-gradient-style and $vaadin-tune-gradient-depth > 0 {
+        @include tune-linear-gradient($header-color);
+      } @else {
+        background-color: $header-color;
+      }
+      color: tune-text-color($header-color);
+      font-weight: 400;
+    }
+  }
+
+}

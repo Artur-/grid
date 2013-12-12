@@ -1,0 +1,222 @@
+@mixin vaadin-veneer-table-bundle {
+  
+  $primaryStyleName : v-table;  
+ 
+  .v-table table {
+  	border-spacing: 0;
+  	border-collapse: separate;
+  	margin: 0;
+  	padding: 0;
+  	border: 0;
+  }
+  
+  .v-table td {
+  	padding: 0;
+  }
+
+  .v-table-header-cell,
+  .v-table-header-cell-asc,
+  .v-table-header-cell-desc,
+  .v-table-footer-cell {
+  	cursor: pointer;
+  }
+
+  .v-table.v-disabled .v-table-header-cell,
+  .v-table.v-disabled .v-table-header-cell-asc,
+  .v-table.v-disabled .v-table-header-cell-desc,
+  .v-table.v-disabled .v-table-footer-cell {
+  	cursor: default;
+  }
+
+  .v-table-resizer {
+	display: block;
+	position: absolute;
+	cursor: col-resize;
+  }
+  
+  .v-table.v-disabled .v-table-resizer {
+	cursor: default;
+  }
+  
+  .v-table-caption-container {
+  	padding-left: 6px;
+  }
+  
+  .v-table-caption-container-align-right {
+  	text-align: right;
+  }
+  
+.#{$primaryStyleName}-sort-indicator {
+	width: 0px;
+	height: 1.2em;
+	float: right;
+}
+.#{$primaryStyleName}-header-cell-asc .#{$primaryStyleName}-sort-indicator,
+.#{$primaryStyleName}-header-cell-desc .#{$primaryStyleName}-sort-indicator {
+	width: 16px;
+	height: 1.2em;
+	float: right;
+}		
+.#{$primaryStyleName}-header-cell-asc .#{$primaryStyleName}-sort-indicator {
+	background: transparent url(../common/img/sprites.png) no-repeat right 6px;
+}
+.#{$primaryStyleName}-header-cell-desc .#{$primaryStyleName}-sort-indicator {
+	background: transparent url(../common/img/sprites.png) no-repeat right -10px;
+}
+.#{$primaryStyleName}-caption-container-align-center {
+	text-align: center;
+}
+.#{$primaryStyleName}-caption-container-align-right {
+	text-align: right;
+}
+.#{$primaryStyleName}-caption-container .v-icon,
+.#{$primaryStyleName}-header-drag .v-icon {
+	vertical-align: middle;
+}
+.#{$primaryStyleName}-row-spacer {
+	height: 10px;
+	overflow: hidden; /* IE hack to allow < one line height divs */
+}
+.#{$primaryStyleName}-row,
+.#{$primaryStyleName}-row-odd {
+    background: #fff;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+}
+
+.#{$primaryStyleName}-generated-row {
+	   background: #efefef;
+}
+
+.#{$primaryStyleName}-body-noselection .#{$primaryStyleName}-row,
+.#{$primaryStyleName}-body-noselection .#{$primaryStyleName}-row-odd {
+	cursor: default;
+}
+.#{$primaryStyleName} .v-selected {
+	background: #999;
+	color: #fff;
+}
+td.#{$primaryStyleName}-cell-content {
+	white-space: nowrap;
+	overflow: hidden;
+	padding: 0 6px;
+	border-right: 1px solid #aaa;
+}
+.#{$primaryStyleName}-cell-wrapper {
+	/* Do not specify any margins, paddings or borders here */
+	white-space: nowrap;
+	overflow: hidden;
+}
+.#{$primaryStyleName}-cell-wrapper-align-center {
+	text-align: center;
+}
+.#{$primaryStyleName}-cell-wrapper-align-right {
+	text-align: right;
+}
+.#{$primaryStyleName}-column-selector {
+	float: right;
+	background: transparent url(../common/img/sprites.png) no-repeat 4px -37px;
+	margin: -1.2em 0 0 0;
+	height: 1.2em;
+	width: 14px;
+	position: relative; /* hide this from IE, it works without it */
+	cursor: pointer;
+}
+.#{$primaryStyleName}.v-disabled .#{$primaryStyleName}-column-selector {
+	cursor: default;
+}
+.#{$primaryStyleName}-focus-slot-left {
+	border-left: 2px solid #999;
+	float: none;
+	margin-bottom: -1.2em;
+	width: auto;
+	background: transparent;
+	border-right: 1px solid #aaa;
+}
+.#{$primaryStyleName}-focus-slot-right {
+	border-right: 2px solid #999;
+	margin-left: -2px;
+}
+.#{$primaryStyleName}-header-drag {
+	position: absolute;
+	background: #efefef;
+	border: 1px solid #eee;
+	opacity: 0.9;
+	filter: alpha(opacity=90);
+	margin-top: 20px;
+	z-index: 30000;
+}
+.#{$primaryStyleName}-header-drag .v-icon {
+	vertical-align: middle;
+}
+.#{$primaryStyleName}-scrollposition {
+	width: 160px;
+	background: #eee;
+	border: 1px solid #aaa;
+}
+.#{$primaryStyleName}-scrollposition span {
+	display: block;
+	text-align: center;
+}
+.#{$primaryStyleName}-body:focus,
+.#{$primaryStyleName}-body-wrapper:focus {
+	outline: none;
+}
+.#{$primaryStyleName}-body.focused {
+	border-color: #388ddd;
+}
+.#{$primaryStyleName}-focus .#{$primaryStyleName}-cell-content {
+	border-top: 1px dotted #0066bd;
+	border-bottom: 1px dotted #0066bd;
+}
+.#{$primaryStyleName}-focus .#{$primaryStyleName}-cell-wrapper {
+	margin-top: -1px;
+	margin-bottom: -1px;
+}
+/* row in column selector */
+.v-on {
+	
+}
+.v-off {
+	color: #ddd;
+}
+/*************************************
+ * Drag'n'drop styles
+ *************************************/
+.#{$primaryStyleName}-drag .#{$primaryStyleName}-body {
+	border-color: #1d9dff;
+}
+.#{$primaryStyleName}-row-drag-middle .#{$primaryStyleName}-cell-content {
+	background-color: #bcdcff;
+}
+.#{$primaryStyleName}-row-drag-top .#{$primaryStyleName}-cell-content {
+	border-top: 2px solid #1d9dff;
+}
+.#{$primaryStyleName}-row-drag-top .#{$primaryStyleName}-cell-wrapper {
+	margin-top: -2px; /* compensate the space consumed by border hint */
+}
+.#{$primaryStyleName}-row-drag-bottom .#{$primaryStyleName}-cell-content {
+	border-bottom: 2px solid #1d9dff;
+}
+.#{$primaryStyleName}-row-drag-bottom .#{$primaryStyleName}-cell-wrapper {
+	margin-bottom: -2px; /* compensate the space consumed by border hint */
+}
+.#{$primaryStyleName}-row-drag-top .#{$primaryStyleName}-cell-content:first-child:before,
+.#{$primaryStyleName}-row-drag-bottom .#{$primaryStyleName}-cell-content:first-child:after {
+	display: block;
+	
+	position: absolute;
+	width: 6px;
+	height: 6px;
+	margin-top: -4px;
+	margin-left: -6px;
+	background: transparent url(../common/img/drag-slot-dot.png);
+}
+.v-ff & .#{$primaryStyleName}-row-drag-bottom .#{$primaryStyleName}-cell-content:first-child:after,
+.v-ie & .#{$primaryStyleName}-row-drag-bottom .#{$primaryStyleName}-cell-content:first-child:after {
+	margin-top: -2px;
+}
+  
+}

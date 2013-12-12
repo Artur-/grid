@@ -1,0 +1,80 @@
+$v-grid-background-color: if(color-luminance($v-app-background-color) < 122, darken($v-app-background-color, 5%), lighten($v-app-background-color, 5%)) !default;
+
+@mixin v-veneer-grid ($primary-stylename: v-grid) {
+
+  .#{$primary-stylename} {
+    background: transparent;
+  }
+  
+  .#{$primary-stylename}-tablewrapper {
+  	@include box-sizing(border-box);
+    border: $v-widget-border-width solid button-border-color($v-widget-color, $v-app-background-color);
+  }
+  
+  
+  .#{$primary-stylename}-cell {
+    // TODO hard-coded sizes because the cell size is hardcoded ATM
+    font-size: 13px;
+    border-width: 0;
+    padding: 0 ceil($v-unit-size/6);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: $v-grid-background-color;
+    color: text-color($v-grid-background-color);
+    
+    &:first-child {
+      padding-left: ceil($v-unit-size/3);
+    }
+    
+    &:last-child {
+      padding-right: ceil($v-unit-size/3);
+    }
+  }
+  
+  .#{$primary-stylename}-cell.frozen {
+    border-right: $v-widget-border-width solid border-color($v-grid-background-color);
+  }
+
+  .#{$primary-stylename}-row:nth-child(odd) {
+  	.#{$primary-stylename}-cell {
+      background-color: darken($v-grid-background-color, 2%);
+  	}
+  }
+  
+  .#{$primary-stylename}-header,
+  .#{$primary-stylename}-footer {
+    @if $v-emboss-depth > 0 {
+      text-shadow: v-veneer-emboss-text-shadow();
+    }
+    
+    .#{$primary-stylename}-row .#{$primary-stylename}-cell {
+      $depth: ceil($v-gradient-depth/2);
+      @if color-luminance($v-widget-color) > 200 {
+        $depth: min(100%, $depth * 2);
+      }
+      background-color: color-overlay(#000, $v-widget-color, $depth);
+      color: text-color($v-widget-color);
+    }
+    
+  	.#{$primary-stylename}-row:first-child .#{$primary-stylename}-cell {
+      @include v-veneer-gradient($v-widget-color, $depth: ceil($v-gradient-depth/2));
+    }
+    
+    .#{$primary-stylename}-cell.frozen {
+      border-right-color: border-color($v-widget-color);
+    }
+  }
+  
+  .#{$primary-stylename}-header {
+    .#{$primary-stylename}-row:last-child .#{$primary-stylename}-cell {
+      border-bottom: $v-widget-border-width solid button-border-color($v-widget-color, $v-grid-background-color);
+    }
+  }
+  
+  .#{$primary-stylename}-footer {
+    .#{$primary-stylename}-row:first-child .#{$primary-stylename}-cell {
+      border-top: $v-widget-border-width solid button-border-color($v-widget-color, $v-grid-background-color);
+    }
+  }
+  
+}

@@ -1,0 +1,7 @@
+@import "veneer";
+
+.veneer {
+  @include v-veneer;
+}
+
+@include v-veneer-icons-fontface;

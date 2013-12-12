@@ -3,13 +3,13 @@ package org.vaadin.artur.grid.data;
 import java.io.Serializable;
 
 public class Address implements Serializable {
-	private String streetName="";
-	private String city="";
+	private String _streetName = "";
+	private String city = "";
 	private Country country;
 
-	public Address(String streetName, String city, Country country) {
+	public Address(String _streetName, String city, Country country) {
 		super();
-		this.streetName = streetName;
+		this._streetName = _streetName;
 		this.city = city;
 		this.country = country;
 	}
@@ -18,12 +18,12 @@ public class Address implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getStreetName() {
-		return streetName;
+	public String get_streetName() {
+		return _streetName;
 	}
 
-	public void setStreetName(String streeName) {
-		this.streetName = streeName;
+	public void set_streetName(String _streetName) {
+		this._streetName = _streetName;
 	}
 
 	public String getCity() {

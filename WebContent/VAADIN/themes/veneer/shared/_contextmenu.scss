@@ -1,0 +1,15 @@
+@mixin vaadin-veneer-contextmenu-bundle {
+  
+  .v-contextmenu {
+    @extend %tune-selection-popup;
+  }
+  
+  .v-contextmenu .gwt-MenuItem {
+    @extend %tune-selection;
+  }
+  
+  .v-contextmenu .gwt-MenuItem-selected {
+    @extend %tune-selection-selected;
+  }
+  
+}

@@ -1,0 +1,6 @@
+// Variable settings for /addons/prefixer.scss
+$prefix-for-webkit:    true !global;
+$prefix-for-mozilla:   true !global;
+$prefix-for-microsoft: true !global;
+$prefix-for-opera:     true !global;
+$prefix-for-spec:      true !global; // required for keyframe mixin
