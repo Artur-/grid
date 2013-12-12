@@ -19,9 +19,8 @@ public class Sass {
 			String error = getString(p.getErrorStream());
 			p.waitFor();
 			int exitValue = p.exitValue();
-			System.out.println(exitValue);
-			String line;
 			if (error != null && !error.isEmpty()) {
+				System.out.println(exitValue);
 				System.out.println(error);
 				css = "";
 			} else {
